@@ -6,7 +6,7 @@ root.geometry("1920x1108")
 root.title("Municipal problem resolver")
 
 #background image
-bacg=ImageTk.PhotoImage(Image.open("6.jpg"))
+bacg=ImageTk.PhotoImage(Image.open("login and reg/6.jpg"))
 bac=Label(root,image=bacg,height=1108,width=1920)
 bac.place(x=0,y=0)
 
@@ -21,7 +21,7 @@ login.place(x=110,y=30)
 
 
 #logo
-logo=ImageTk.PhotoImage(Image.open("logo5.jpg"))
+logo=ImageTk.PhotoImage(Image.open("login and reg/logo5.jpg"))
 lg=Label(frame,image=logo,bg="purple",width=100,height=100)
 lg.place(x=250,y=80)
 
@@ -34,7 +34,7 @@ un.place(x=200,y=200)
 un_line.place(x=170,y=225)
 un_label.place(x=120,y=180)
 
-un_logo=ImageTk.PhotoImage(Image.open("username.png"))
+un_logo=ImageTk.PhotoImage(Image.open("login and reg/username.png"))
 u=Label(frame,image=un_logo,bg="#040405",height=20,width=23)
 u.place(x=160,y=200)
 
@@ -47,7 +47,7 @@ pw.place(x=200,y=260)
 pw_line.place(x=170,y=280)
 pw_label.place(x=120,y=235)
 
-pw_logo=ImageTk.PhotoImage(Image.open("password.png"))
+pw_logo=ImageTk.PhotoImage(Image.open("login and reg/password.png"))
 p=Label(frame,image=pw_logo,bg="#040405",height=20,width=23)
 p.place(x=160,y=255)
 
