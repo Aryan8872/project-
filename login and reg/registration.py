@@ -7,7 +7,7 @@ root.title("Registration page")
 root.config(bg="black")
 
 #background image
-bacg=ImageTk.PhotoImage(Image.open("image.png"))
+bacg=ImageTk.PhotoImage(Image.open("login and reg/image.png"))
 bac=Label(root,image=bacg,height=1070,width=1845)
 bac.place(x=0,y=0)
 
@@ -24,7 +24,7 @@ title3.place(x=250,y=350)
 frame=LabelFrame(root,width=600,height=640,bg="black")
 frame.place(x=850,y=120)
 #frame bg
-bac=ImageTk.PhotoImage(Image.open("r3.jpg"))
+bac=ImageTk.PhotoImage(Image.open("login and reg/r3.jpg"))
 back=Label(frame,image=bac,height=640,width=600)
 back.place(x=0,y=0)
 
@@ -85,7 +85,7 @@ phn_line.place(x=190,y=414)
 phn_label.place(x=160,y=370)
 
 #register
-img=ImageTk.PhotoImage(Image.open("button.png"))
+img=ImageTk.PhotoImage(Image.open("login and reg/button.png"))
 btn_lbl=Label(frame,image=img,bg="gray11")
 btn_lbl.place(x=200,y=520)
 register=Button(frame,text="REGISTER",fg="white",bg="limegreen",font=("Helvetica 15 bold"),activeforeground="limegreen",width=18,bd=0,cursor="hand2")
