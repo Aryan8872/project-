@@ -7,7 +7,7 @@ root.title("Registration page")
 root.config(bg="black")
 
 #background image
-bacg=ImageTk.PhotoImage(Image.open("login and reg/image.png"))
+bacg=ImageTk.PhotoImage(Image.open("login and reg/bgreg2.jpg"))
 bac=Label(root,image=bacg,height=1070,width=1845)
 bac.place(x=0,y=0)
 
@@ -22,7 +22,7 @@ title3.place(x=250,y=350)
 
 #frame
 frame=LabelFrame(root,width=600,height=640,bg="black")
-frame.place(x=850,y=120)
+frame.place(x=900,y=120)
 #frame bg
 bac=ImageTk.PhotoImage(Image.open("login and reg/r3.jpg"))
 back=Label(frame,image=bac,height=640,width=600)
