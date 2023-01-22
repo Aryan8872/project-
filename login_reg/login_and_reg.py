@@ -137,16 +137,6 @@ au.place(x=260,y=440)
                              #DATABASE CONNECTION for LOGIN PAGE
 
 
-'''
-conn=sqlite3.connect('login.db')
-c=conn.cursor()
-
-c.execute(""" CREATE TABLE IF NOT EXISTS login(
-    user_name text,
-    password string
-
-)""")'''
-
 
 
 def login_action():
@@ -292,7 +282,7 @@ def register():
 
     )""")
 
-    def add_rec():
+    def add_rec():        
         conn=sqlite3.connect('registration.db')
         c=conn.cursor()
 
@@ -306,7 +296,9 @@ def register():
         })
         conn.commit()
         conn.close()
+        messagebox.showinfo("Success",'account created Successfully!')
 
+        reg.destroy()
 
 
     #register
