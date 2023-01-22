@@ -21,8 +21,8 @@ frame.place(x=520,y=120)
 
 
 #login in to your account
-login=Label(frame,text="LOGIN IN TO YOUR ACCOUNT",fg="white",font=("Helvetica 20 bold"),bg="black")
-login.place(x=110,y=30)
+login=Label(frame,text="LOGIN PAGE",fg="white",font=("Helvetica 20 bold"),bg="black")
+login.place(x=220,y=30)
 
 
 #logo
@@ -121,12 +121,12 @@ def forgotpass():
 
 #forgot password
 fp=Button(frame,text="FORGOT PASSWORD?",font=("Helvetica 10 italic"),bg="black",fg="red",activebackground="black",bd=0,command=forgotpass)
-fp.place(x=280,y=290)
+fp.place(x=330,y=290)
 
 
 #question
 ques=Label(frame,text="DONT HAVE AN ACCOUNT YET? ",font=("Helvetica 10 italic"),bg="black",fg="white")
-ques.place(x=175,y=390)
+ques.place(x=175,y=410)
 
 #about us
 au=Label(frame,text="ABOUT US",font=("Helvetica 10 bold"),bg="black",fg="limegreen")
@@ -309,13 +309,13 @@ def register():
     register.place(x=221,y=532)
 
 #create account
-create=Button(frame,text="create one",font=("Arial 10 bold"),fg="white",bg="black",command=register)
-create.place(x=390,y=389)
+create=Button(frame,text="CREATE ONE",font=("Arial 10 bold"),fg="white",bg="black",command=register)
+create.place(x=390,y=410)
 
 
 #login button
 login_b=Button(frame,text="LOGIN",bg="green",fg="white",font=("Helvetica 14 bold"),padx=50,command=login_action,cursor="hand2")
-login_b.place(x=220,y=320)
+login_b.place(x=220,y=340)
 
 
 
