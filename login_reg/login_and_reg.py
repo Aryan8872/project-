@@ -250,12 +250,10 @@ def register():
     #radio button
     gender=Label(frame2,text="GENDER",bg="gray11",fg="WHITE",font=("Helvetica 10 bold"))
     gender.place(x=160,y=430)
-    gender1=Checkbutton(frame2,text="Male",fg="DARKGRAY",bg="LAVENDER",font=("Helvetica 10 bold"),variable="male")
-    gender1.place(x=200,y=460)
-    gender2=Checkbutton(frame2,text="Female",fg="DARKGRAY",bg="LAVENDER",font=("Helvetica 10 bold"),variable="female")
-    gender2.place(x=280,y=460)
-    gender3=Checkbutton(frame2,text="Other",fg="DARKGRAY",bg="LAVENDER",font=("Helvetica 10 bold"),variable="others")
-    gender3.place(x=380,y=460)
+    gen=StringVar
+    Radiobutton(frame2,text="Male",fg="DARKGRAY",bg="LAVENDER",font=("Helvetica 10 bold"),variable=gen,value="Male").place(x=200,y=460)
+    Radiobutton(frame2,text="Female",fg="DARKGRAY",bg="LAVENDER",font=("Helvetica 10 bold"),variable=gen,value="Female").place(x=280,y=460)
+    Radiobutton(frame2,text="Other",fg="DARKGRAY",bg="LAVENDER",font=("Helvetica 10 bold"),variable=gen,value="Other").place(x=380,y=460)
 
 
 
