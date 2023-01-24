@@ -4,58 +4,80 @@ from tkinter import messagebox
 import sqlite3
 from tkinter import messagebox
 
-
-
 root=Tk()
 root.geometry("1920x1108")
-root.title("Municipal problem resolver")
-
-#background image
-bacg=ImageTk.PhotoImage(Image.open("login_reg/6.jpg"))
-bac=Label(root,image=bacg,height=1108,width=1920)
-bac.place(x=0,y=0)
+root.title("MUNICIPAL PROBLEM RESOLVER")
+root.config(bg="powderblue")
 
 #frame
-frame=LabelFrame(root,width=670,height=500,bg="black")
-frame.place(x=520,y=120)
-
+frame=LabelFrame(root,width=1000,height=1108,bg="lavender")
+frame.place(x=0,y=0)
 
 #login in to your account
-login=Label(frame,text="LOGIN PAGE",fg="white",font=("Helvetica 20 bold"),bg="black")
-login.place(x=220,y=30)
-
-
-#logo
-logo=ImageTk.PhotoImage(Image.open("login_reg/logo5.jpg"))
-lg=Label(frame,image=logo,bg="purple",width=100,height=100)
-lg.place(x=250,y=80)
-
+login=Label(frame,text="LOGIN",fg="white",font=("Helvetica 20 bold"),bg="lavender")
+login.place(x=450,y=110)
 
 #username
-un_label=Label(frame,text="USERNAME",bg="#040405",font=("Helvetica 10 bold"),fg="#4f4e4d")
-un_entry=Entry(frame,font=("Helvetica 14 bold"),bg="#040405",highlightthickness=0,relief=FLAT,fg="#6b6a69")
-un_line=Canvas(frame,width=300,height=2.0,bg="#bdb9b1",highlightthickness=0)
-un_entry.place(x=200,y=200)
-un_line.place(x=170,y=225)
-un_label.place(x=120,y=180)
+un_entry=Entry(frame,font=("Helvetica 14 bold"),width=25,bd=0,bg="lavender",fg="white")
+un_entry.place(x=360,y=255)
+un_entry.insert(0,'Username')
+un_line=Canvas(frame,width=280,height=2.0,bg="white",highlightthickness=0)
+un_line.place(x=360,y=280)
 
-un_logo=ImageTk.PhotoImage(Image.open("login_reg/username.png"))
-u=Label(frame,image=un_logo,bg="#040405",height=20,width=23)
-u.place(x=160,y=200)
+#fucntion to remove "Username" when mouse cursor is clicked in entry box
+def on_enter(event):
+    if un_entry.get()=='Username':
+        un_entry.delete(0,END)
+un_entry.bind('<FocusIn>',on_enter)
+
+#fucntion to add "Username" when mouse cursor is unclicked from entry box
+def on_exit(event0):
+    if un_entry.get()=='':
+        un_entry.insert(0,'Username')
+un_entry.bind('<FocusOut>',on_exit)
 
 
 #password
-pw_label=Label(frame,text="PASSWORD",bg="#040405",font=("Helvetica 10 bold"),fg="#4f4e4d")
-pw_entry=Entry(frame,font=("Helvetica 14 bold"),bg="#040405",highlightthickness=0,relief=FLAT,fg="#6b6a69",show="*")
-pw_line=Canvas(frame,width=300,height=2.0,bg="#bdb9b1",highlightthickness=0)
-pw_entry.place(x=200,y=260)
-pw_line.place(x=170,y=280)
-pw_label.place(x=120,y=235)
+pw_entry=Entry(frame,font=("Helvetica 14 bold"),width=25,bd=0,bg="lavender",fg="white")
+pw_entry.place(x=360,y=350)
+pw_entry.insert(0,'Password')
+pw_line=Canvas(frame,width=280,height=2.0,bg="white",highlightthickness=0)
+pw_line.place(x=360,y=375)
 
-pw_logo=ImageTk.PhotoImage(Image.open("login_reg/password.png"))
+#fucntion to remove "Password" when mouse cursor is clicked in entry box
+def on_enter1(event1):
+    if pw_entry.get()=='Password':
+        pw_entry.delete(0,END)
+pw_entry.bind('<FocusIn>',on_enter1)
 
-p=Label(frame,image=pw_logo,bg="#040405",height=20,width=23)
-p.place(x=160,y=255)
+#fucntion to add "Password" when mouse cursor is unclicked from entry box
+def on_enter2(event2):
+    if pw_entry.get()=='':
+        pw_entry.insert(0,'Password')
+pw_entry.bind('<FocusOut>',on_enter2)
+
+#hide and show password
+#function to change closeeye to openeye
+def hide():
+    closeeye.config(file='openeye.png')
+    pw_entry.config(show='*')
+    eyeButton.config(command=show)
+
+#function to change openeye to closeeye
+def show():
+    closeeye.config(file='closeeye.png')
+    pw_entry.config(show='')
+    eyeButton.config(command=hide)
+
+
+closeeye=PhotoImage(file='closeeye.png')
+eyeButton=Button(frame,image=closeeye,bd=0,bg='lavender',activebackground='lavender',cursor='hand2',command=hide)
+eyeButton.place(x=610,y=345)
+
+
+#loginbutton
+loginButton=Button(frame,text='Login',font=('Open Sans',16,'bold'),fg='lavender',bg='white',activebackground='white',activeforeground="lavender",cursor='hand2',bd=0,width=22,command=lambda: login_action)
+loginButton.place(x=360,y=460)
 
 
 ##############################################################################################################################################################
@@ -117,20 +139,24 @@ def forgotpass():
     save_btn=Button(fp,text="SAVE",bg="pink",activebackground="pink",activeforeground="pink",fg="green",command=lambda:change_pass())
     save_btn.place(x=10,y=120)
     
-
-
 #forgot password
-fp=Button(frame,text="FORGOT PASSWORD?",font=("Helvetica 10 italic"),bg="black",fg="red",activebackground="black",bd=0,command=forgotpass)
-fp.place(x=330,y=290)
+forgetButton=Button(frame,text='Forgot Password?',bd=0,font=("Helvetica 10 italic"),fg="white",bg='lavender',activebackground='lavender',activeforeground="white",cursor='hand2',command=forgotpass)
+forgetButton.place(x=560,y=395)
 
 
-#question
-ques=Label(frame,text="DONT HAVE AN ACCOUNT YET? ",font=("Helvetica 10 italic"),bg="black",fg="white")
-ques.place(x=175,y=410)
 
-#about us
-au=Label(frame,text="ABOUT US",font=("Helvetica 10 bold"),bg="black",fg="limegreen")
-au.place(x=260,y=440)
+# #forgot password
+# fp=Button(frame,text="FORGOT PASSWORD?",font=("Helvetica 10 italic"),bg="black",fg="red",activebackground="black",bd=0,command=forgotpass)
+# fp.place(x=330,y=290)
+
+
+# #question
+# ques=Label(frame,text="DONT HAVE AN ACCOUNT YET? ",font=("Helvetica 10 italic"),bg="black",fg="white")
+# ques.place(x=175,y=410)
+
+# #about us
+# au=Label(frame,text="ABOUT US",font=("Helvetica 10 bold"),bg="black",fg="limegreen")
+# au.place(x=260,y=440)
 
 
 #===================================================================================================================================
@@ -169,7 +195,7 @@ def register():
     reg.config(bg="black")
 
     #background image
-    root_bg=ImageTk.PhotoImage(Image.open("login_reg/bgreg2.jpg"))
+    root_bg=ImageTk.PhotoImage(Image.open("bgreg2.jpg"))
     back=Label(reg,image=root_bg,height=1070,width=1845)
     back.place(x=0,y=0)
 
@@ -186,7 +212,7 @@ def register():
     frame2=LabelFrame(reg,width=600,height=640,bg="black")
     frame2.place(x=900,y=120)
     #frame bg
-    frame_bg=ImageTk.PhotoImage(Image.open("login_reg/r3.jpg"))
+    frame_bg=ImageTk.PhotoImage(Image.open("r3.jpg"))
     bacg=Label(frame2,image=frame_bg,height=640,width=600)
     bacg.place(x=0,y=0)
 
@@ -300,7 +326,7 @@ def register():
 
 
     #register
-    img=ImageTk.PhotoImage(Image.open("login_reg/button.png"))
+    img=PhotoImage(file='button.png')
     btn_lbl=Label(frame2,image=img,bg="gray11")
     btn_lbl.place(x=200,y=520)
     register=Button(frame2,text="REGISTER",fg="white",bg="limegreen",font=("Helvetica 15 bold"),activeforeground="limegreen",width=18,bd=0,cursor="hand2",command=add_rec)
@@ -311,9 +337,9 @@ create=Button(frame,text="CREATE ONE",font=("Arial 10 bold"),fg="white",bg="blac
 create.place(x=390,y=410)
 
 
-#login button
-login_b=Button(frame,text="LOGIN",bg="green",fg="white",font=("Helvetica 14 bold"),padx=50,command=login_action,cursor="hand2")
-login_b.place(x=220,y=340)
+# #login button
+# login_b=Button(frame,text="LOGIN",bg="green",fg="white",font=("Helvetica 14 bold"),padx=50,command=login_action,cursor="hand2")
+# login_b.place(x=220,y=340)
 
 
 
