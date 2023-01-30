@@ -95,13 +95,18 @@ phn_line.place(x=190,y=414)
 phn_label.place(x=160,y=370)
 
 
-    #radio button
+    #radio button to select gender of user
 gender=Label(frame2,text="GENDER",bg="lavender",fg="black",font=("Helvetica 10 bold"))
 gender.place(x=160,y=430)
-gen=StringVar
-Radiobutton(frame2,text="Male",fg="black",bg="lavender",font=("Helvetica 10 bold"),variable=gen,value="Male").place(x=200,y=460)
-Radiobutton(frame2,text="Female",fg="black",bg="lavender",font=("Helvetica 10 bold"),variable=gen,value="Female").place(x=280,y=460)
-Radiobutton(frame2,text="Other",fg="black",bg="lavender",font=("Helvetica 10 bold"),variable=gen,value="Other").place(x=380,y=460)
+gen = StringVar()
+gen.set(" ")
+
+def clicked():
+    global gend
+    gend=gen.get()
+Radiobutton(frame2,text="Male",fg="black",bg="lavender",font=("Helvetica 10 bold"),variable=gen,value="Male",command=clicked).place(x=200,y=460)
+Radiobutton(frame2,text="Female",fg="black",bg="lavender",font=("Helvetica 10 bold"),variable=gen,value="Female",command=clicked).place(x=280,y=460)
+Radiobutton(frame2,text="Other",fg="black",bg="lavender",font=("Helvetica 10 bold"),variable=gen,value="Other",command=clicked).place(x=380,y=460)
 
 
 def login_open():
@@ -130,14 +135,15 @@ c.execute(""" CREATE TABLE IF NOT EXISTS register(
         user_name text PRIMARY KEY,
         password text,
         email text ,
-        phone_num integer
+        phone_num integer,
+        gender text
       
     )""")
 
 def add_rec():
     conn=sqlite3.connect('registration.db')
     c=conn.cursor()
-    c.execute("INSERT INTO register VALUES( :first_name, :last_name, :user_name, :password, :email, :phone_num )",{
+    c.execute("INSERT INTO register VALUES( :first_name, :last_name, :user_name, :password, :email, :phone_num, :gender )",{
 
             'first_name':first_name_ent.get(),
             'last_name':lastname_ent.get(),
@@ -145,6 +151,7 @@ def add_rec():
             'password':passwd_ent.get(),
             'email':email_ent.get(),
             'phone_num':phn_entry.get(),
+            'gender':gend
            
             })
     conn.commit()
