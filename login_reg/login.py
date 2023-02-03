@@ -5,14 +5,14 @@ import sqlite3
 from tkinter import messagebox
 
 root=Tk()
-root.geometry("1920x1108")
+root.geometry("900x600")
 root.title("MUNICIPAL PROBLEM RESOLVER")
-root.config(bg="powderblue")
+root.config(bg="skyblue")
 
-#logo of login
-logo_login=ImageTk.PhotoImage(Image.open("logo-white (2).png"))
-logo=Label(root,image=logo_login)
-logo.place(x=800,y=-100)
+# #logo of login
+# logo_login=ImageTk.PhotoImage(Image.open("logo-white (2).png"))
+# logo=Label(root,image=logo_login)
+# logo.place(x=800,y=-100)
 
 
 
@@ -22,19 +22,19 @@ def main_page():
     import main_page
  
 # login frame
-frame=LabelFrame(root,width=970,height=1108,bg="lavender")
+frame=LabelFrame(root,width=500,height=600,bg="lavender")
 frame.place(x=0,y=0)
 
 #login in to your account
 login=Label(frame,text="LOGIN",fg="skyblue",font=("Helvetica 20 bold"),bg="lavender")
-login.place(x=450,y=110)
+login.place(x=220,y=80)
 
 #username
 un_entry=Entry(frame,font=("Helvetica 14 bold"),width=25,bd=0,bg="lavender",fg="black")
-un_entry.place(x=360,y=255)
+un_entry.place(x=140,y=200)
 un_entry.insert(0,'Username')
 un_line=Canvas(frame,width=280,height=2.0,bg="black",highlightthickness=0)
-un_line.place(x=360,y=280)
+un_line.place(x=140,y=225)
 
 #fucntion to remove "Username" when mouse cursor is clicked in entry box
 def on_enter(event):
@@ -51,15 +51,16 @@ un_entry.bind('<FocusOut>',on_exit)
 
 #password
 pw_entry=Entry(frame,font=("Helvetica 14 bold"),width=25,bd=0,bg="lavender",fg="black")
-pw_entry.place(x=360,y=350)
+pw_entry.place(x=140,y=300)
 pw_entry.insert(0,'Password')
 pw_line=Canvas(frame,width=280,height=2.0,bg="black",highlightthickness=0)
-pw_line.place(x=360,y=375)
+pw_line.place(x=140,y=325)
 
 #fucntion to remove "Password" when mouse cursor is clicked in entry box
 def on_enter1(event1):
     if pw_entry.get()=='Password':
         pw_entry.delete(0,END)
+        pw_entry.config(show='*')
 pw_entry.bind('<FocusIn>',on_enter1)
 
 #fucntion to add "Password" when mouse cursor is unclicked from entry box
@@ -68,22 +69,23 @@ def on_enter2(event2):
         pw_entry.insert(0,'Password')
 pw_entry.bind('<FocusOut>',on_enter2)
 
+
 #hide and show password
 #function to change closeeye to openeye
 def hide():
-    closeeye.config(file='openeye.png')
+    closeeye.config(file='closeeye.png')
     pw_entry.config(show='*')
     eyeButton.config(command=show)
 
 #function to change openeye to closeeye
 def show():
-    closeeye.config(file='closeeye.png')
+    closeeye.config(file='openeye.png')
     pw_entry.config(show='')
     eyeButton.config(command=hide)
 
 
 closeeye=PhotoImage(file='closeeye.png')
-eyeButton=Button(frame,image=closeeye,bd=0,bg='lavender',activebackground='lavender',cursor='hand2',command=hide)
+eyeButton=Button(frame,image=closeeye,bd=0,bg='lavender',activebackground='lavender',cursor='hand2',command=show)
 eyeButton.place(x=610,y=345)
 
 
@@ -125,16 +127,8 @@ def login_action():
 
 
 #loginbutton
-loginButton=Button(frame,text='Login',font=('Open Sans',16,'bold'),fg='black',bg='powderblue',activebackground='lavender',activeforeground="lavender",cursor='hand2',bd=0,width=22,command= login_action)
-loginButton.place(x=360,y=460)
-
-def open_reg():
-    root.destroy()
-    import registration
-
-#create account
-create=Button(frame,text="CREATE ONE",font=("Arial 10 bold"),fg="black",bg="lavender",command=open_reg,activebackground="lavender",bd=0)
-create.place(x=390,y=410)
+loginButton=Button(frame,text='Login',font=('Open Sans',16,'bold'),fg='black',bg='skyblue',activebackground='lavender',activeforeground="lavender",cursor='hand2',bd=0,width=22,command= login_action)
+loginButton.place(x=140,y=400)
 
 
 
@@ -195,7 +189,7 @@ def forgotpass():
     
 #forgot password
 forgetButton=Button(frame,text='Forgot Password?',bd=0,font=("Helvetica 10 italic"),fg="black",bg='lavender',activebackground='lavender',activeforeground="black",cursor='hand2',command=forgotpass)
-forgetButton.place(x=560,y=395)
+forgetButton.place(x=360,y=345)
 
 
 
@@ -203,6 +197,16 @@ forgetButton.place(x=560,y=395)
                                  #registration page
 
 
+def open_reg():
+    root.destroy()
+    import registration
+
+#create account
+create=Button(root,text="Create Account",font=('Open Sans',14,'bold'),fg="black",bg="lavender",command=open_reg,activebackground="skyblue",bd=0,cursor='hand2',width=20)
+create.place(x=600,y=300)
+
+#text on registeration template
+new=Label(root,text="New here? Join us",font=("Arial 20 bold"),fg="lavender",bg="skyblue").place(x=600,y=180)
 
 
 
