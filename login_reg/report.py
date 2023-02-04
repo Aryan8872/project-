@@ -11,7 +11,7 @@ from tkcalendar import DateEntry
 
 root=Tk()
 root.geometry("1920x1108")
-root.config(bg="skyblue")
+root.config(bg="lavender")
 
 def over_v():
     root.destroy()
@@ -26,14 +26,23 @@ def sts():
     import status
 
 #buttons
-overview=Button(root,text="OVERVIEW",font=("Helvetica 50 bold"),bg="skyblue",command=over_v,bd=0)
+overview=Button(root,text="OVERVIEW",font=("Helvetica 25 bold"),bg="lightskyblue",command=over_v,width=22)
 overview.place(x=1100,y=140)
 
-report=Button(root,text="REPORT",font=("Helvetica 50 bold"),bg="skyblue",command=rep,bd=0)
-report.place(x=1100,y=280)
+report=Button(root,text="REPORT",font=("Helvetica 25 bold"),bg="lightskyblue",command=rep,width=22)
+report.place(x=1100,y=220)
 
-status=Button(root,text="STATUS",font=("Helvetica 50 bold"),bg="skyblue",command=sts,bd=0)
-status.place(x=1100,y=420)
+status=Button(root,text="STATUS",font=("Helvetica 25 bold"),bg="lightskyblue",command=sts,width=22)
+status.place(x=1100,y=300)
+
+ov_line=Canvas(root,width=600,height=3,bg="black",highlightthickness=0)
+ov_line.place(x=1000,y=212)
+
+report_line=Canvas(root,width=600,height=3,bg="black",highlightthickness=0)
+report_line.place(x=1100,y=292)
+
+status_line=Canvas(root,width=600,height=3,bg="black",highlightthickness=0)
+status_line.place(x=1100,y=372)
 
 
 
@@ -70,50 +79,50 @@ logo_label.place(x=930,y=10)
 
 
 #report here
-report_label=Label(rep_frame,text="REPORT",fg="deepskyblue2",font=("Helvetica 35 bold"))
+report_label=Label(rep_frame,text="REPORT",fg="deepskyblue2",bg="lavender",font=("Helvetica 35 bold"))
 report_label.place(x=450,y=0)
 
-date_sel=Label(rep_frame,text="Date:",fg="deepskyblue2",font=("Helvetica 25 bold"))
+date_sel=Label(rep_frame,text="Date:",fg="deepskyblue2",bg="lavender",font=("Helvetica 25 bold"))
 date_sel.place(x=950,y=20)
 
 cal=DateEntry(rep_frame,selectmode='day')
 cal.place(x=950,y=70)
 
-name=Label(rep_frame,text="Name of the reporter:-",fg="deepskyblue2",font=("Helvetica 25 bold"))
+name=Label(rep_frame,text="Name of the reporter:-",fg="deepskyblue2",bg="lavender",font=("Helvetica 25 bold"))
 name.place(x=0,y=80)
 
-fn=Label(rep_frame,text="First Name",fg="deepskyblue2",font=("Helvetica 15 bold"))
+fn=Label(rep_frame,text="First Name",fg="deepskyblue2",bg="lavender",font=("Helvetica 15 bold"))
 fn.place(x=0,y=150)
 
-fn_entry=Entry(rep_frame,fg="black",bd=0,font=("Helvetica 15 bold"))
+fn_entry=Entry(rep_frame,fg="black",bg="white",bd=0,font=("Helvetica 15 bold"))
 fn_entry.place(x=0,y=180)
 
-ln=Label(rep_frame,text="Last Name",fg="deepskyblue2",font=("Helvetica 15 bold"))
+ln=Label(rep_frame,text="Last Name",fg="deepskyblue2",bg="lavender",font=("Helvetica 15 bold"))
 ln.place(x=250,y=150)
 
 ln_entry=Entry(rep_frame,fg="black",bd=0,font=("Helvetica 15 bold"))
 ln_entry.place(x=250,y=180)
 
-locat=Label(rep_frame,text="Location:",fg="deepskyblue2",font=("Helvetica 25 bold"))
+locat=Label(rep_frame,text="Location:",fg="deepskyblue2",bg="lavender",font=("Helvetica 25 bold"))
 locat.place(x=500,y=80)
 
-ward=Label(rep_frame,text="Ward No.:",fg="deepskyblue2",font=("Helvetica 15 bold"))
+ward=Label(rep_frame,text="Ward No.:",fg="deepskyblue2",bg="lavender",font=("Helvetica 15 bold"))
 ward.place(x=500,y=150)
 
 ward_entry=Entry(rep_frame,fg="black",bd=0,font=("Helvetica 15 bold"))
 ward_entry.place(x=500,y=180)
 
-tole=Label(rep_frame,text="Tole:",fg="deepskyblue2",font=("Helvetica 15 bold"))
+tole=Label(rep_frame,text="Tole:",fg="deepskyblue2",bg="lavender",font=("Helvetica 15 bold"))
 tole.place(x=780,y=150)
 
 tole_entry=Entry(rep_frame,fg="black",bd=0,font=("Helvetica 15 bold"))
 tole_entry.place(x=780,y=180)
 
 
-issue=Label(rep_frame,text="Issues Related to:",fg="deepskyblue2",font=("Helvetica 20 bold"))
+issue=Label(rep_frame,text="Issues Related to:",fg="deepskyblue2",bg="lavender",font=("Helvetica 20 bold"))
 issue.place(x=0,y=230)
 
-level=Label(rep_frame,text="Level of severity:",fg="deepskyblue2",font=("Helvetica 20 bold"))
+level=Label(rep_frame,text="Level of severity:",fg="deepskyblue2",bg="lavender",font=("Helvetica 20 bold"))
 level.place(x=500,y=230)
 
 
@@ -124,14 +133,14 @@ sev.set(" ")
 def clicked():
     global sevr
     sevr=sev.get()
-Radiobutton(rep_frame,text="LOW",font=('Ariel', 17),fg="green",background="white",variable=sev,value="LOW",command=clicked).place(x=500,y=280)
-Radiobutton(rep_frame,text="MODERATE",font=('Ariel', 17),fg="blue",background="white",variable=sev,value="MODERATE",command=clicked).place(x=590,y=280)
-Radiobutton(rep_frame,text="CRITCIAL",font=('Ariel', 17),fg="red",background="white",variable=sev,value="CRITICAL",command=clicked).place(x=760,y=280)
+Radiobutton(rep_frame,text="Low",font=('Ariel', 17),fg="deepskyblue2",background="lavender",variable=sev,value="LOW",command=clicked).place(x=500,y=280)
+Radiobutton(rep_frame,text="Moderate",font=('Ariel', 17),fg="deepskyblue2",background="lavender",variable=sev,value="MODERATE",command=clicked).place(x=600,y=280)
+Radiobutton(rep_frame,text="Critical",font=('Ariel', 17),fg="deepskyblue2",background="lavender",variable=sev,value="CRITCIAL",command=clicked).place(x=760,y=280)
 
-descp=Label(rep_frame,text="Descriptive Explanation",fg="deepskyblue2",font=("Helvetica 20 bold"))
+descp=Label(rep_frame,text="Descriptive Explanation",fg="deepskyblue2",background="lavender",font=("Helvetica 20 bold"))
 descp.place(x=500,y=350)
 
-box=Text(rep_frame,width=50,height=6,bg="limegreen",font=("Ariel 13 bold"))
+box=Text(rep_frame,width=50,height=6,bg="white",font=("Ariel 13 bold"))
 box.place(x=500,y=400)
 
 

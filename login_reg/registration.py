@@ -4,10 +4,10 @@ from tkinter import messagebox
 
 root=Tk()
 root.title("Municipal Problem Reporting")
-root.configure(background='white')
+root.configure(background='lavender')
 root.geometry("1200x700")
 # root.iconbitmap('Capture.ico')
-root.configure(background='white')
+root.configure(background='lavender')
 
 def open_login():
     root.destroy()
@@ -17,33 +17,33 @@ def open_login():
 frame2=Frame(root,width=400,height=700,highlightbackground="skyblue", highlightthickness=1,background="skyblue")
 frame2.place(x=800,y=0)
 
-frame1=Frame(root,width=800,height=700,highlightbackground="white", highlightthickness=1,background="white")
+frame1=Frame(root,width=800,height=700,highlightbackground="lavender", highlightthickness=1,background="lavender")
 frame1.place(x=0,y=0)
 
 #labels
-registration=Label(frame1,text="Registration",font=('Ariel',35),fg="skyblue",background="white")
+registration=Label(frame1,text="Registration",font=('Ariel',35),fg="skyblue",background="lavender")
 registration.place(x=75,y=25)
 
-username=Label(frame1,text="User Name",font=('Ariel', 17),fg="skyblue",background="white")
+username=Label(frame1,text="User Name",font=('Ariel', 17),fg="skyblue",background="lavender")
 username.place(x=45,y=120)
 
-password=Label(frame1,text="Password",font=('Ariel', 17),fg="skyblue",background="white")
+password=Label(frame1,text="Password",font=('Ariel', 17),fg="skyblue",background="lavender")
 password.place(x=445,y=110)
 
-phn=Label(frame1,text="Mobile Number",font=('Ariel', 17),fg="skyblue",background="white")
+phn=Label(frame1,text="Mobile Number",font=('Ariel', 17),fg="skyblue",background="lavender")
 phn.place(x=45,y=220)
 
-email1=Label(frame1,text="E-Mail Address",font=('Ariel', 17),fg="skyblue",background="white")
+email1=Label(frame1,text="E-Mail Address",font=('Ariel', 17),fg="skyblue",background="lavender")
 email1.place(x=45,y=330)
 
-add=Label(frame1,text="Address",font=('Ariel', 17),fg="skyblue",background="white")
+add=Label(frame1,text="Address",font=('Ariel', 17),fg="skyblue",background="lavender")
 add.place(x=445,y=330)
 
 
-Confirm=Label(frame1,text="Confirm Password",font=('Ariel', 17),fg="skyblue",background="white")
+Confirm=Label(frame1,text="Confirm Password",font=('Ariel', 17),fg="skyblue",background="lavender")
 Confirm.place(x=445,y=220)
 
-ward=Label(frame1,text="Ward Number",font=('Ariel', 17),fg="skyblue",background="white")
+ward=Label(frame1,text="Ward Number",font=('Ariel', 17),fg="skyblue",background="lavender")
 ward.place(x=45,y=440)
 
 calls=Label(frame2,text="Contact:",font=('Ariel', 25),fg="white",background="skyblue")
@@ -53,32 +53,32 @@ num=Label(frame2,text="9862186238",font=('Ariel', 25),fg="white",bg="skyblue")
 num.place(x=10,y=550)
 
 #ENTRY BOXES
-usernam_entry=Entry(frame1,width=35,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="white")
+usernam_entry=Entry(frame1,width=35,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="lavender")
 usernam_entry.place(x=58,y=165)
 
-pass_entry=Entry(frame1,width=25,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="white")
+pass_entry=Entry(frame1,width=25,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="lavender")
 pass_entry.place(x=458,y=165)
 
-confpass_entry=Entry(frame1,width=25,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="white")
+confpass_entry=Entry(frame1,width=25,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="lavender")
 confpass_entry.place(x=458,y=275)
 
-entryemail=Entry(frame1,width=25,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="white")
+entryemail=Entry(frame1,width=25,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="lavender")
 entryemail.place(x=58,y=385)
 
-addr_ent=Entry(frame1,width=25,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="white")
+addr_ent=Entry(frame1,width=25,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="lavender")
 addr_ent.place(x=458,y=385)
 
-entryward=Entry(frame1,width=35,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="white")
+entryward=Entry(frame1,width=35,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="lavender")
 entryward.place(x=58,y=495)
 
 
-phn_entry=Entry(frame1,width=25,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="white")
+phn_entry=Entry(frame1,width=25,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="lavender")
 phn_entry.place(x=58,y=275)
 phn_entry.insert(0,"+977")
 
 
 var=IntVar
-c=Checkbutton(frame1,text="Keep Me Logged in",font=('Ariel', 17),variable=var,background="white")
+c=Checkbutton(frame1,text="Keep Me Logged in",font=('Ariel', 17),variable=var,background="lavender")
 c.place(x=290,y=550)
 
 
@@ -121,7 +121,7 @@ mycanvas12.place(x=450,y=420)
 
 
     #radio button to select gender of user
-gender=Label(frame1,text="GENDER",font=('Ariel', 17),fg="skyblue",background="white")
+gender=Label(frame1,text="GENDER",font=('Ariel', 17),fg="skyblue",background="lavender")
 gender.place(x=445,y=440)
 gen = StringVar()
 gen.set(" ")
@@ -129,9 +129,9 @@ gen.set(" ")
 def clicked():
     global gend
     gend=gen.get()
-Radiobutton(frame1,text="Male",font=('Ariel', 17),fg="skyblue",background="white",variable=gen,value="Male",command=clicked).place(x=415,y=495)
-Radiobutton(frame1,text="Female",font=('Ariel', 17),fg="skyblue",background="white",variable=gen,value="Female",command=clicked).place(x=520,y=495)
-Radiobutton(frame1,text="Other",font=('Ariel', 17),fg="skyblue",background="white",variable=gen,value="Other",command=clicked).place(x=650,y=495)
+Radiobutton(frame1,text="Male",font=('Ariel', 17),fg="skyblue",background="lavender",variable=gen,value="Male",command=clicked).place(x=440,y=500)
+Radiobutton(frame1,text="Female",font=('Ariel', 17),fg="skyblue",background="lavender",variable=gen,value="Female",command=clicked).place(x=540,y=500)
+Radiobutton(frame1,text="Other",font=('Ariel', 17),fg="skyblue",background="lavender",variable=gen,value="Other",command=clicked).place(x=660,y=500)
 
  #===================================================================================================================================
     #===================================================================================================================================

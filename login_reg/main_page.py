@@ -6,7 +6,7 @@ from tkinter import messagebox
 
 root=Tk()
 root.geometry("1920x1108")
-root.config(bg="skyblue")
+root.config(bg="lavender")
 
 
 
@@ -25,15 +25,23 @@ def sts():
     import status
 
 #buttons
-overview=Button(root,text="OVERVIEW",font=("Helvetica 50 bold"),bg="skyblue",command=over_v,bd=0)
+overview=Button(root,text="OVERVIEW",font=("Helvetica 25 bold"),bg="lightskyblue",command=over_v,width=22)
 overview.place(x=1100,y=140)
 
-report=Button(root,text="REPORT",font=("Helvetica 50 bold"),bg="skyblue",command=rep,bd=0)
-report.place(x=1100,y=280)
+report=Button(root,text="REPORT",font=("Helvetica 25 bold"),bg="lightskyblue",command=rep,width=22)
+report.place(x=1100,y=220)
 
-status=Button(root,text="STATUS",font=("Helvetica 50 bold"),bg="skyblue",command=sts,bd=0)
-status.place(x=1100,y=420)
+status=Button(root,text="STATUS",font=("Helvetica 25 bold"),bg="lightskyblue",command=sts,width=22)
+status.place(x=1100,y=300)
 
+ov_line=Canvas(root,width=600,height=3,bg="black",highlightthickness=0)
+ov_line.place(x=1000,y=212)
+
+report_line=Canvas(root,width=600,height=3,bg="black",highlightthickness=0)
+report_line.place(x=1100,y=292)
+
+status_line=Canvas(root,width=600,height=3,bg="black",highlightthickness=0)
+status_line.place(x=1100,y=372)
 
 ov_text=LabelFrame(root,width=1100,height=600,bg="lavender")
 ov_text.place(x=0,y=134)

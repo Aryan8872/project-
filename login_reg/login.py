@@ -8,6 +8,8 @@ root=Tk()
 root.geometry("900x600")
 root.title("MUNICIPAL PROBLEM RESOLVER")
 root.config(bg="skyblue")
+root.maxsize(900,600)
+root.minsize(900,600)
 
 # #logo of login
 # logo_login=ImageTk.PhotoImage(Image.open("logo-white (2).png"))
