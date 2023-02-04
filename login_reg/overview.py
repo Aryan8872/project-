@@ -14,17 +14,15 @@ def over_v():
     root.destroy()
     import overview
 
-
 def rep():
     root.destroy()
     import report
-
 
 def sts():
     root.destroy()
     import status
 
-#buttons
+#buttons    
 overview=Button(root,text="OVERVIEW",font=("Helvetica 50 bold"),bg="skyblue",command=over_v,bd=0)
 overview.place(x=1100,y=140)
 
@@ -34,11 +32,19 @@ report.place(x=1100,y=280)
 status=Button(root,text="STATUS",font=("Helvetica 50 bold"),bg="skyblue",command=sts,bd=0)
 status.place(x=1100,y=420)
 
+ov_line=Canvas(root,width=600,height=3,bg="black")
+ov_line.place(x=1000,y=270)
 
-ov_text=LabelFrame(root,width=1100,height=600,bg="lavender")
+report_line=Canvas(root,width=600,height=3,bg="black")
+report_line.place(x=1100,y=410)
+
+status_line=Canvas(root,width=600,height=3,bg="black")
+status_line.place(x=1100,y=550)
+
+ov_text=LabelFrame(root,width=1100,height=600)
 ov_text.place(x=0,y=134)
 
-ov=Label(ov_text,text="wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww")
+ov=Label(ov_text,text="WELCOME TO MUNICIPAL PROBLEM RESOLVER(MPS).HERE YOU CAN TROUBLESHOOT YOUR PROBLEMS OR DIFFUCLTY THAT YOU ARE FACING OF ANY STANDARDS.WE WILL BE HAPPY TO HELP YOU SOLVING THOSE PROBLEM",fg="deepskyblue2",font=("Helvetica 25 bold"))
 ov.place(x=0,y=0)
 
 #top canvas
