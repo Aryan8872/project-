@@ -182,11 +182,13 @@ def forgotpass():
         else:
             messagebox.showerror('Error!', "Passwords didn't match")
         conn.commit()
+        
         conn.close()
+        
 
 
       #save button
-    save_btn=Button(fp,text="SAVE",bg="pink",activebackground="pink",activeforeground="pink",fg="green",command=lambda:change_pass())
+    save_btn=Button(fp,text="SAVE",bg="pink",activebackground="pink",activeforeground="pink",fg="green",command=change_pass())
     save_btn.place(x=10,y=120)
     
 #forgot password
