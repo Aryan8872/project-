@@ -28,14 +28,14 @@ frame=LabelFrame(root,width=500,height=600,bg="lavender")
 frame.place(x=0,y=0)
 
 #login in to your account
-login=Label(frame,text="LOGIN",fg="skyblue",font=("Helvetica 20 bold"),bg="lavender")
+login=Label(frame,text="LOGIN",fg="deepskyblue2",font=("Helvetica 20 bold"),bg="lavender")
 login.place(x=220,y=80)
 
 #username
-un_entry=Entry(frame,font=("Helvetica 14 bold"),width=25,bd=0,bg="lavender",fg="black")
+un_entry=Entry(frame,font=("Helvetica 14 bold"),width=25,bd=0,bg="lavender",fg="deepskyblue2")
 un_entry.place(x=140,y=200)
 un_entry.insert(0,'Username')
-un_line=Canvas(frame,width=280,height=2.0,bg="black",highlightthickness=0)
+un_line=Canvas(frame,width=280,height=2.0,bg="deepskyblue2",highlightthickness=0)
 un_line.place(x=140,y=225)
 
 #fucntion to remove "Username" when mouse cursor is clicked in entry box
@@ -52,10 +52,10 @@ un_entry.bind('<FocusOut>',on_exit)
 
 
 #password
-pw_entry=Entry(frame,font=("Helvetica 14 bold"),width=25,bd=0,bg="lavender",fg="black")
+pw_entry=Entry(frame,font=("Helvetica 14 bold"),width=25,bd=0,bg="lavender",fg="deepskyblue2")
 pw_entry.place(x=140,y=300)
 pw_entry.insert(0,'Password')
-pw_line=Canvas(frame,width=280,height=2.0,bg="black",highlightthickness=0)
+pw_line=Canvas(frame,width=280,height=2.0,bg="deepskyblue2",highlightthickness=0)
 pw_line.place(x=140,y=325)
 
 #fucntion to remove "Password" when mouse cursor is clicked in entry box
@@ -129,7 +129,7 @@ def login_action():
 
 
 #loginbutton
-loginButton=Button(frame,text='Login',font=('Open Sans',16,'bold'),fg='black',bg='skyblue',activebackground='lavender',activeforeground="lavender",cursor='hand2',bd=0,width=22,command= login_action)
+loginButton=Button(frame,text='Login',font=('Open Sans',16,'bold'),fg='deepskyblue2',bg='lavender',activebackground='lavender',activeforeground="lavender",cursor='hand2',width=22,command= login_action)
 loginButton.place(x=140,y=400)
 
 
@@ -188,11 +188,11 @@ def forgotpass():
 
 
       #save button
-    save_btn=Button(fp,text="SAVE",bg="pink",activebackground="pink",activeforeground="pink",fg="green",command=change_pass())
+    save_btn=Button(fp,text="SAVE",bg="pink",activebackground="pink",activeforeground="pink",fg="green",command=change_pass)
     save_btn.place(x=10,y=120)
     
 #forgot password
-forgetButton=Button(frame,text='Forgot Password?',bd=0,font=("Helvetica 10 italic"),fg="black",bg='lavender',activebackground='lavender',activeforeground="black",cursor='hand2',command=forgotpass)
+forgetButton=Button(frame,text='Forgot Password?',bd=0,font=("Helvetica 10 italic"),fg="deepskyblue2",bg='lavender',activebackground='lavender',activeforeground="deepskyblue2",cursor='hand2',command=forgotpass)
 forgetButton.place(x=360,y=345)
 
 
@@ -206,11 +206,11 @@ def open_reg():
     import registration
 
 #create account
-create=Button(root,text="Create Account",font=('Open Sans',14,'bold'),fg="black",bg="lavender",command=open_reg,activebackground="skyblue",bd=0,cursor='hand2',width=20)
+create=Button(root,text="Create Account",font=('Open Sans',14,'bold'),fg="deepskyblue2",bg="white",command=open_reg,activebackground="skyblue",bd=0,cursor='hand2',width=20)
 create.place(x=600,y=300)
 
 #text on registeration template
-new=Label(root,text="New here? Join us",font=("Arial 20 bold"),fg="lavender",bg="skyblue").place(x=600,y=180)
+new=Label(root,text="New here? Join us",font=("Arial 20 bold"),fg="white",bg="skyblue").place(x=600,y=180)
 
 
 

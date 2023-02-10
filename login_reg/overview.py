@@ -32,33 +32,11 @@ topcan=Canvas(root,height=80,width=1800,bg="black")
 topcan.place(x=0,y=0)
 
 
-#buttons
-overview=Button(root,text="OVERVIEW",font=("Helvetica 15 bold"),bg="black",command=over_v,fg="red",bd=0)
-overview.place(x=890,y=30)
 
-report=Button(root,text="REPORT",font=("Helvetica 15 bold"),bg="black",fg="white",command=rep,bd=0)
-report.place(x=1050,y=30)
-
-status=Button(root,text="STATUS",font=("Helvetica 15 bold"),bg="black",fg="white",command=sts,bd=0)
-status.place(x=1200,y=30)
-
-ov_line=Canvas(root,width=600,height=3,bg="black",highlightthickness=0)
-ov_line.place(x=1000,y=212)
-
-report_line=Canvas(root,width=600,height=3,bg="black",highlightthickness=0)
-report_line.place(x=1100,y=292)
-
-status_line=Canvas(root,width=600,height=3,bg="black",highlightthickness=0)
-status_line.place(x=1100,y=372)
-
-
-rep_frame=LabelFrame(root,width=1100,height=690,bg="lavender")
-rep_frame.place(x=0,y=80)
 
 #middle canvas
-middle=Canvas(rep_frame,width=3,height=470,bg="black")
-middle.place(x=520,y=100)
-
+middle=Canvas(root,width=3,height=650,bg="black")
+middle.place(x=930,y=90)
 
 #bottom canvas
 bottomcan=Canvas(root,height=50,width=1800,bg="black")
@@ -84,6 +62,31 @@ logo_label.place(x=640,y=5)
 proj_logo2=ImageTk.PhotoImage(Image.open("second.png"))
 logo_label2=Label(root,image=proj_logo2,bd=0,bg="black",height=60,width=150)
 logo_label2.place(x=0,y=10)
+
+myLable = Label(root,text="Welcome to MPR",font=("Colonna MT",30,"bold"),bg="Lavender",fg="deepskyblue2")
+myLable.place(x=70,y=170)
+
+
+myLable1 = Label(root,text="Familiar with MPR?",font=("Colonna MT",30,"bold"),bg="Lavender",fg="deepskyblue2")
+myLable1.place(x=1000,y=170)
+
+myLable2 = Label(root, text="Tell us how we can make ourselves better for you!",font=("Microsoft Uighur",20),bg="Lavender",fg="deepskyblue2")
+myLable2.place(x=1000,y=280)
+
+feedback_btn=Button(root,text="Feedback",bg="Lavender",activebackground="lavender",activeforeground="deepskyblue2",fg="deepskyblue2",font=("Microsoft Uighur",15))
+feedback_btn.place(x=1100,y=550,width=190,height=47)
+
+
+myLable2 = Label(root, text="MPR is a problem resolver site where we take in any of your municipal problems\nand forward them to respective authorities who will take action on it right away.",font=("Microsoft Uighur",20),bg="Lavender",fg="deepskyblue2")
+myLable2.place(x=70,y=280)
+getstart_btn=Button(root,text="Report",bg="Lavender",activebackground="lavender",activeforeground="deepskyblue2",fg="deepskyblue2",font=("Microsoft Uighur",15))
+getstart_btn.place(x=150,y=500,width=190,height=47)
+
+
+contact_btn=Button(root,text="Status",bg="Lavender",activebackground="lavender",activeforeground="deepskyblue2",fg="deepskyblue2",font=("Microsoft Uighur",15))
+contact_btn.place(x=150,y=600,width=190,height=47)
+
+
 
 ##ACCOUNT VIEWING FEATURE 
 conn=sqlite3.connect("issues.db")
