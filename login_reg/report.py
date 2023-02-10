@@ -24,7 +24,7 @@ def rep():
 
 def sts():
     root.destroy()
-    import status
+    import feedback
 
 
 #top canvas

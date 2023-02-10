@@ -19,9 +19,9 @@ root.minsize(900,600)
 
 
 # importing main_page inside a function
-def main_page():
+def overview_page():
     root.destroy()
-    import main_page
+    import overview
  
 # login frame
 frame=LabelFrame(root,width=500,height=600,bg="lavender")
@@ -74,21 +74,21 @@ pw_entry.bind('<FocusOut>',on_enter2)
 
 #hide and show password
 #function to change closeeye to openeye
-def hide():
-    closeeye.config(file='closeeye.png')
-    pw_entry.config(show='*')
-    eyeButton.config(command=show)
+# def hide():
+#     closeeye.config(file='closeeye.png')
+#     pw_entry.config(show='*')
+#     eyeButton.config(command=show)
 
-#function to change openeye to closeeye
-def show():
-    closeeye.config(file='openeye.png')
-    pw_entry.config(show='')
-    eyeButton.config(command=hide)
+# #function to change openeye to closeeye
+# def show():
+#     closeeye.config(file='openeye.png')
+#     pw_entry.config(show='')
+#     eyeButton.config(command=hide)
 
 
-closeeye=PhotoImage(file='closeeye.png')
-eyeButton=Button(frame,image=closeeye,bd=0,bg='lavender',activebackground='lavender',cursor='hand2',command=show)
-eyeButton.place(x=610,y=345)
+# closeeye=PhotoImage(file='closeeye.png')
+# eyeButton=Button(frame,image=closeeye,bd=0,bg='lavender',activebackground='lavender',cursor='hand2',command=show)
+# eyeButton.place(x=610,y=345)
 
 
 
@@ -121,7 +121,7 @@ def login_action():
                         'un':un
                     })
         conn.commit()
-        main_page()
+        overview_page()
 
     else:
         messagebox.showerror("Failed", "Wrong Login details, please try again.")

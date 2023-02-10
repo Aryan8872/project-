@@ -6,7 +6,7 @@ from PIL import Image,ImageTk
 
 
 #create a window
-root=Tk()
+root=Toplevel()
 root.geometry("1280x720")
 root.title("Accounts")
 root.config(bg="lavender")
@@ -25,13 +25,13 @@ title3.place(x=487,y=18)
 
 
 #project logo
-proj_logo=ImageTk.PhotoImage(Image.open("main_logo.png"))
-logo_label=Label(root,image=proj_logo,bd=0,bg="black",height=70)
-logo_label.place(x=640,y=5)
+logo=ImageTk.PhotoImage(Image.open("main_logo.png"))
+logo1=Label(root,image=logo,bd=0,bg="black",height=70)
+logo1.place(x=640,y=5)
 
-proj_logo2=ImageTk.PhotoImage(Image.open("second.png"))
-logo_label2=Label(root,image=proj_logo2,bd=0,bg="black",height=60,width=150)
-logo_label2.place(x=0,y=10)
+logo_2=ImageTk.PhotoImage(Image.open("second.png"))
+logo2=Label(root,image=logo_2,bd=0,bg="black",height=60,width=150)
+logo2.place(x=0,y=10)
 
 
 
@@ -149,10 +149,9 @@ def logout():
         conn.commit()
         conn.close()
         if msb=='yes':
-
             root.destroy()
             import login
-        elif msb=='no':
+        elif msb=='No':
 
             import account_view
     
@@ -160,7 +159,7 @@ def logout():
   
       
 
-Button(root,text="LOGOUT",font=('Arial',10,'bold'),fg='white',bg="black",width=12,height=2,cursor='hand2',command=logout).place(x=860, y=640) 
+logout_btn=Button(root,text="LOGOUT",font=('Arial',10,'bold'),fg='white',bg="black",width=12,height=2,cursor='hand2',command=logout).place(x=860, y=640) 
 
 #verification for update
  

@@ -1,13 +1,10 @@
 from tkinter import *
-from PIL import ImageTk,Image
-from tkinter import messagebox
 import sqlite3
+from PIL import Image,ImageTk
 from tkinter import messagebox
 
 root=Tk()
 root.geometry("1920x1108")
-root.config(bg="skyblue")
-
 
 def over_v():
     root.destroy()
@@ -25,34 +22,71 @@ def sts():
 topcan=Canvas(root,height=80,width=1800,bg="black")
 topcan.place(x=0,y=0)
 
+#project title on top
+mun=Label(root,text="MUNICIPAL",bg="black",fg="lavender",font=("Helvetica 20 bold"))
+mun.place(x=160,y=18)
+
+prob=Label(root,text="PROBLEM",bg="black",fg="lavender",font=("Helvetica 20 bold"))
+prob.place(x=330,y=18)
+
+resl=Label(root,text="RESOLVER",bg="black",fg="lavender",font=("Helvetica 20 bold"))
+resl.place(x=487,y=18)
+
+#project logo
+proj_logo=ImageTk.PhotoImage(Image.open("main_logo.png"))
+logo_label=Label(root,image=proj_logo,bd=0,bg="black",height=70)
+logo_label.place(x=640,y=5)
+
+proj_logo2=ImageTk.PhotoImage(Image.open("second.png"))
+logo_label2=Label(root,image=proj_logo2,bd=0,bg="black",height=60,width=150)
+logo_label2.place(x=0,y=10)
+
+#BUTTONS
+overview=Button(root,text="OVERVIEW",font=("Helvetica 15 bold"),bg="black",command=over_v,fg="red",bd=0)
+overview.place(x=890,y=30)
+
+report=Button(root,text="REPORT",font=("Helvetica 15 bold"),bg="black",fg="white",command=rep,bd=0)
+report.place(x=1050,y=30)
+
+status=Button(root,text="STATUS",font=("Helvetica 15 bold"),bg="black",fg="white",command=sts,bd=0)
+status.place(x=1200,y=30) 
+
 #frame for status feature
 st_frame=LabelFrame(root,width=1920,height=200)
 st_frame.place(x=0,y=80)
 
-
 #code for changing background of the frame so that the progress can be shown
 
 def bg_Change():
-    conn=sqlite3.connect("feedback.db")
-    c=conn.cursor()
-    c.execute("SELECT * from feedback WHERE user_name=:user",{'user':un_entry.get()})
-    data=c.fetchall()
-    conn.commit()
-    conn.close()
-    global bgc
-    bgc=''
-    try:
-        st_frame.configure(bg=data[0][3])
-    except:
-        st_frame.configure(bg="blue")
+    if fn_entry.get()=='' or un_entry.get()=='':
+        messagebox.showerror("error","one or many fields are empty!")
+    else:
+        conn=sqlite3.connect("status.db")
+        c=conn.cursor()
+        c.execute("SELECT * from status WHERE user_name=:user",{'user':un_entry.get()})
+        data=c.fetchall()
+        conn.commit()
+        conn.close()
+        global bgc
+        bgc=''
+        try:
+            st_frame.configure(bg=data[0][3])
+        except:
+            st_frame.configure(bg="yellow")
 
 
+#button for checking progress
+check_prog=Button(st_frame,text="Check",command=bg_Change,bg="green",font=("Helvetica 13 bold"),width=20)
+check_prog.place(x=605,y=120)
 
+
+#firstname
 fn_label=Label(root,font=("Helvetica 15 bold"),text="#ENTER YOUR FIRSTNAME")
 fn_label.place(x=200,y=100)
 fn_entry=Entry(root,font=("Helvetica 12 bold"))
 fn_entry.place(x=200,y=140)
 
+#username
 un_label=Label(root,font=("Helvetica 15 bold"),text="#ENTER YOUR USERNAME")
 un_label.place(x=600,y=100)
 un_entry=Entry(root,font=("Helvetica 12 bold"))
@@ -64,144 +98,86 @@ ln_label.place(x=1000,y=100)
 ln_entry=Entry(root,font=("Helvetica 12 bold"))
 ln_entry.place(x=1000,y=140)
 
-#button for checking progress
-check_prog=Button(st_frame,text="check",command=bg_Change)
-check_prog.place(x=0,y=60)
-
 #bottom canvas
 bottomcan=Canvas(root,height=50,width=1800,bg="black")
 bottomcan.place(x=0,y=750)
 
- #project logo
-proj_logo=ImageTk.PhotoImage(Image.open("main_logo.png"))
-logo_label=Label(root,image=proj_logo,bd=0,bg="black",height=70)
-logo_label.place(x=640,y=5)
+#Guiding lines
 
-proj_logo2=ImageTk.PhotoImage(Image.open("second.png"))
-logo_label2=Label(root,image=proj_logo2,bd=0,bg="black",height=60,width=150)
-logo_label2.place(x=0,y=10)
+label1=Label(root,text="STEP-1: Enter the above mentioned data with a valid username",font=("Helvetica 15 bold"))
+label1.place(x=300,y=340)
 
-#buttons placed on top canvas
-overview=Button(root,text="OVERVIEW",font=("Helvetica 15 bold"),bg="black",command=over_v,fg="red",bd=0)
-overview.place(x=890,y=30)
+label2=Label(root,text="STEP-2: After submitting the valid data, we will notify you!",font=("Helvetica 15 bold"))
+label2.place(x=300,y=390)
 
-report=Button(root,text="REPORT",font=("Helvetica 15 bold"),bg="black",fg="white",command=rep,bd=0)
-report.place(x=1050,y=30)
+#color indication
+blue=Label(root,bg="blue",text="BLUE",font=("Helvetica 11 bold"))
+blue.place(x=1100,y=340)
+blue_mean=Label(root,text="--REPORT RECEIVED",font=("Helvetica 9 bold"))
+blue_mean.place(x=1200,y=340)
 
-status=Button(root,text="STATUS",font=("Helvetica 15 bold"),bg="black",fg="white",command=sts,bd=0)
-status.place(x=1200,y=30)
+red=Label(root,text="RED",bg="red",font=("Helvetica 11 bold"))
+red.place(x=1100,y=380)
+red_mean=Label(root,text="--HELP IS ON THE WAY",font=("Helvetica 9 bold"))
+red_mean.place(x=1200,y=380)
 
-#account button
-def acc():
-    import account_view
+green=Label(root,text="GREEN",bg="green",font=("Helvetica 11 bold"))
+green.place(x=1100,y=420)
+green_mean=Label(root,text="--PROBLEM RESOLVED",font=("Helvetica 9 bold"))
+green_mean.place(x=1200,y=420)
 
-account=Button(root,text="ACCOUNT",font=("Helvetica 15 bold"),command=acc,bd=0,fg="blue",bg="black",activebackground="black")
-account.place(x=1390,y=30)
+yellow=Label(root,text="YELLOW",bg="yellow",font=("Helvetica 11 bold"))
+yellow.place(x=1100,y=460)
+yellow_mean=Label(root,text="--No data!")
+yellow_mean.place(x=1200,y=460)
 
-#project title
-title1=Label(root,text="MUNICIPAL",bg="skyblue",fg="lavender",font=("Helvetica 13 bold"))
-title1.place(x=160,y=290)
-
-title2=Label(root,text="PROBLEM",bg="skyblue",fg="lavender",font=("Helvetica 13 bold"))
-title2.place(x=255,y=290)
-
-title3=Label(root,text="RESOLVER",bg="skyblue",fg="lavender",font=("Helvetica 13 bold"))
-title3.place(x=350,y=290)
-
-#your feed back
-text=Label(root,text="YOUR FEEDBACK",bg="skyblue",font=("Helvetica 16 bold"))
-text.place(x=450,y=289)
-
-
-#project title for feedback
-
-mun=Label(root,text="MUNICIPAL",bg="black",fg="lavender",font=("Helvetica 20 bold"))
-mun.place(x=160,y=18)
-
-prob=Label(root,text="PROBLEM",bg="black",fg="lavender",font=("Helvetica 20 bold"))
-prob.place(x=330,y=18)
-
-resl=Label(root,text="RESOLVER",bg="black",fg="lavender",font=("Helvetica 20 bold"))
-resl.place(x=487,y=18)
-
-
-#canvas
-feedb_line=Canvas(root,height=2.0,width=290,bg="black")
-feedb_line.place(x=160,y=320)
-
-feedb_line2=Canvas(root,height=2.0,width=200)
-feedb_line2.place(x=459,y=320)
-
-#feedback appeal
-appeal=Label(root,text="WE WOULD LIKE YOUR FEEDBACK TO IMPROVE OUR APPLICATION",font=("Helvetica 14 bold"),bg="skyblue")
-appeal.place(x=400,y=360)
-
-appeal2=Label(root,text="WHAT IS YOUR OPINION OF OUR APPLICATION?",font=("Helvetica 14 bold"),bg="skyblue")
-appeal2.place(x=480,y=430)
-
-appeal3=Label(root,text="Please leave your feedback below: ",font=("Helvetica 12 bold"),bg="skyblue")
-appeal3.place(x=370,y=560)
-
-line=Canvas(root,height=2,width=740)
-line.place(x=350,y=550)
-
-#icon buttons
-sad_png=PhotoImage(file="fav_icons\\sad.png")
-sad=Button(root,image=sad_png,bg="lavender",bd=0)
-sad.place(x=570,y=500)
-
-neutral_png=PhotoImage(file="fav_icons\\neutral.png")
-neutral=Button(root,image=neutral_png,bg="lavender",bd=0)
-neutral.place(x=640,y=500)
-
-satisfied_png=PhotoImage(file="fav_icons\\satis.png")
-satisfied=Button(root,image=satisfied_png,bg="lavender",bd=0)
-satisfied.place(x=710,y=500)
-
-happy_png=PhotoImage(file="fav_icons\\verhappy.png")
-happy=Button(root,image=happy_png,bg="lavender",bd=0)
-happy.place(x=780,y=500)
-
-#text box
-txtbox=Text(root,height=5)
-txtbox.place(x=370,y=600)
 
 #creating table for database 
-conn=sqlite3.connect("feedback.db")
+conn=sqlite3.connect("status.db")
 c=conn.cursor()
-c.execute("""CREATE TABLE IF NOT EXISTS feedback(
+c.execute("""CREATE TABLE IF NOT EXISTS status(
     user_name text PRIMARY KEY,
     first_name text,
     last_name text,
-    problem_status text,
-    feedback text
+    problem_status text
+
 )""")
 conn.commit()
 conn.close()
 
-#inserting feedback data into database
-def submit():
-
-    conn=sqlite3.connect("feedback.db")
-    data=txtbox.get(1.0,END)
+#inserting data into database so that status can be checked
+def change():
+    
+    conn=sqlite3.connect("registration.db")           
     c=conn.cursor()
-    c.execute("INSERT INTO feedback VALUES(:username,:firstname,:lastname,:problem_status,:feedback)",{
-        'username':un_entry.get(),
-        'firstname':fn_entry.get(),
-        'lastname':ln_entry.get(),
-        'problem_status':"blue",
-        'feedback':data     
-    })
+    c.execute("SELECT * from register")                 #selecting all data from registration database for verification
+    record=c.fetchall()
+    if (un_entry.get()==record[0][0]):  
+                                                    #if data exists then status can be checked
+        conn=sqlite3.connect("status.db")
+        c=conn.cursor()
+        c.execute("INSERT INTO status VALUES(:username,:firstname,:lastname,:problem_status)",{
 
-    conn.commit()
-    conn.close()
-    messagebox.showinfo('Success',"Thank you for your feedback!")
+                'username':un_entry.get(),
+                'firstname':fn_entry.get(),
+                'lastname':ln_entry.get(),
+                'problem_status':"blue"           
+            })
 
-#send button
-send=Button(root,text="SEND",bg="green",font=("Helvetica 12 bold"),width=15,command=submit)
-send.place(x=850,y=700)
+        conn.commit()
+        conn.close()
+        messagebox.showinfo('Success',"Data exists!")
+    else:
+            messagebox.showerror("Error!","Username is not correct")
 
 
+#send button for sending request to admins
+send=Button(st_frame,text="SEND",bg="skyblue3",font=("Helvetica 12 bold"),width=15,command=change)
+send.place(x=1250,y=120)
 
-
+def page_ref():            #it refreshes page by destroying window and again opening it
+    root.destroy()
+    import status
+refresh_button=Button(root,text="REFRESH",fg="lavender",bg="green",font=("Helvetica 12 bold"),width=15,command=page_ref)
+refresh_button.place(x=500,y=460)
 root.mainloop()
