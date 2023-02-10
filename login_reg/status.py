@@ -33,14 +33,44 @@ topcan.place(x=0,y=0)
 
 
 #buttons
-overview=Button(topcan,text="OVERVIEW",font=("Helvetica 15 bold"),bg="black",command=over_v,fg="white",bd=0)
+#overviewBUtton
+def on_enter(e):
+   overview.config(background='black', foreground= "red")
+
+def on_leave(e):
+   overview.config(background= 'black', foreground= 'white')
+
+overview=Button(root,text="OVERVIEW",font=("Helvetica 15 bold"),bg="black",command=over_v,fg="white",bd=0)
 overview.place(x=890,y=30)
+
+overview.bind('<Enter>', on_enter)
+overview.bind('<Leave>', on_leave)
+
+#ReportButton
+def on_enter(e):
+   report.config(background='black', foreground= "red")
+
+def on_leave(e):
+   report.config(background= 'black', foreground= 'white')
 
 report=Button(root,text="REPORT",font=("Helvetica 15 bold"),bg="black",fg="white",command=rep,bd=0)
 report.place(x=1050,y=30)
 
+report.bind('<Enter>', on_enter)
+report.bind('<Leave>', on_leave)
+
+#StatusButton
+def on_enter(e):
+   status.config(background='black', foreground= "white")
+
+def on_leave(e):
+   status.config(background= 'black', foreground= 'red')
 status=Button(root,text="STATUS",font=("Helvetica 15 bold"),bg="black",fg="red",command=sts,bd=0)
 status.place(x=1200,y=30)
+
+status.bind('<Enter>', on_enter)
+status.bind('<Leave>', on_leave)
+
 
 ov_line=Canvas(root,width=600,height=3,bg="black",highlightthickness=0)
 ov_line.place(x=1000,y=212)
