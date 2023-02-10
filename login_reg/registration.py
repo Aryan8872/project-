@@ -138,6 +138,7 @@ Radiobutton(frame1,text="Other",font=('Ariel', 17),fg="skyblue",background="lave
                                 #database connnection
                                 
 
+
 conn=sqlite3.connect('registration.db')
 c=conn.cursor()
 c.execute(""" CREATE TABLE IF NOT EXISTS register(
@@ -145,22 +146,26 @@ c.execute(""" CREATE TABLE IF NOT EXISTS register(
         password text,
         phone_num integer,
         email text,
+        address text,
         ward no integer ,
-        gender text
+        gender text,
+        user_status boolean
       
     )""")
 
 def add_rec():
     conn=sqlite3.connect('registration.db')
     c=conn.cursor()
-    c.execute("INSERT INTO register VALUES( :username, :password, :phone_num, :email, :ward,  :gender )",{
+    c.execute("INSERT INTO register VALUES( :username, :password, :phone_num, :email, :add, :ward,  :gender, :user_status )",{
 
             'username':usernam_entry.get(),
             'password':pass_entry.get(),
             'phone_num':phn_entry.get(),
             'email':entryemail.get(),
+            'add':addr_ent.get(),
             'ward':entryward.get(),
-            'gender':gend
+            'gender':gend,
+            'user_status':False
            
             })
     conn.commit()

@@ -6,10 +6,6 @@ from tkinter import messagebox
 from tkcalendar import DateEntry
 from tkinter import font
  
-
-
-
-
 root=Tk()
 root.geometry("1920x1108")
 root.config(bg="lavender")
@@ -88,35 +84,11 @@ contact_btn.place(x=150,y=600,width=190,height=47)
 
 
 
-##ACCOUNT VIEWING FEATURE 
-conn=sqlite3.connect("issues.db")
-c=conn.cursor()
-c.execute("""CREATE TABLE IF NOT EXISTS issues(
-    date integer,
-    urgency string,
-    phone_number integer
-    
-
-)""")
 def acc():
     import account_view
 
 account=Button(root,text="ACCOUNT",font=("Helvetica 15 bold"),command=acc,bd=0,fg="blue",bg="black",activebackground="black")
 account.place(x=1390,y=30)
 
-# textbox=Text(root,width=20,height=20)
-# textbox.pack()
-# def submit(): 
 
-#     textfile=open("data.txt",'a')
-#     saved=textfile.write(textbox.get(1.0,END))
-#     textbox.insert(END,saved)
-#     global myimage
-#     myimage=filedialog.askopenfilename(initialdir="/",filetypes=(("images","*.jpg"),))
-#     file_path=myimage
-#     imag=PhotoImage(file=file_path)
-#     textbox.image_create(END,image=imag)
-
-# butn=Button(root,text="submit",command=submit)
-# butn.pack()
 root.mainloop()

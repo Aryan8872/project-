@@ -107,14 +107,14 @@ def login_action():
     result = c.fetchall()
     if result:
         messagebox.showinfo("Success", 'Logged in Successfully.')
-        c.execute("""UPDATE register SET
-                    status=:inactive
-                    WHERE status=:active""",
-                    {'inactive':False,
-                    'active':True})
+        # c.execute("""UPDATE register SET
+        #             status=:inactive
+        #             WHERE status=:active""",
+        #             {'inactive':False,
+        #             'active':True})
         conn.commit()
         c.execute("""UPDATE register SET
-                    status= :condition
+                    user_status= :condition
                     WHERE user_name = :un""",
                     {
                         'condition':True,
