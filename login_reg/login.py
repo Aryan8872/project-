@@ -97,28 +97,33 @@ pw_entry.bind('<FocusOut>',on_enter2)
 
 
 def login_action():
-    conn = sqlite3.connect("registration.db")
-    c = conn.cursor()
 
-    user = 'SELECT * FROM register WHERE user_name = ? and password = ?'
-    c.execute(user, [(un_entry.get()), (pw_entry.get())])
-    un=un_entry.get()
-    result = c.fetchall()
-    if result:
-        messagebox.showinfo("Success", 'Logged in Successfully.')
-        conn.commit()
-        c.execute("""UPDATE register SET
-                    user_status= :condition
-                    WHERE user_name = :un""",
-                    {
-                        'condition':True,
-                        'un':un
-                    })
-        conn.commit()
-        overview_page()
-
+    if un_entry.get()=='' or pw_entry.get()=='':
+        messagebox.showinfo("error","one or more fields are empty")
     else:
-        messagebox.showerror("Failed", "Wrong Login details, please try again.")
+            
+        conn = sqlite3.connect("registration.db")
+        c = conn.cursor()
+
+        user = 'SELECT * FROM register WHERE user_name = ? and password = ?'
+        c.execute(user, [(un_entry.get()), (pw_entry.get())])
+        un=un_entry.get()
+        result = c.fetchall()
+        if result:
+            messagebox.showinfo("Success", 'Logged in Successfully.')
+            conn.commit()
+            c.execute("""UPDATE register SET
+                        user_status= :condition
+                        WHERE user_name = :un""",
+                        {
+                            'condition':True,
+                            'un':un
+                        })
+            conn.commit()
+            overview_page()
+
+        else:
+            messagebox.showerror("Failed", "Wrong Login details, please try again.")
 
 
 
