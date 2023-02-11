@@ -164,31 +164,31 @@ logout_btn=Button(root,text="LOGOUT",font=('Arial',10,'bold'),fg='white',bg="bla
 #verification for update
  
 
-#update function
-def update():
-    conn=sqlite3.connect("registration.db")
-    c=conn.cursor()
-    c.execute("""UPDATE register SET 
-        password= :pass,
-        phone_num= :phn,
-        email= :em,
-        address= :addr,
-        ward no= :ward,
-        gender= :gen,
-        WHERE  user_status= :state,""",
-        {
-        'pass':pwd_entry.get(),
-        'phn':phn_entry.get(),
-        'em':em_entry.get(),
-        'addr':add_entry.get(),
-        'ward':ward_entry.get(),
-        'state':True
-        })
+# #update function
+# def update():
+#     conn=sqlite3.connect("registration.db")
+#     c=conn.cursor()
+#     c.execute("""UPDATE register SET 
+#         password= :pass,
+#         phone_num= :phn,
+#         email= :em,
+#         address= :addr,
+#         ward no= :ward,
+#         gender= :gen,
+#         WHERE  user_status= :state,""",
+#         {
+#         'pass':pwd_entry.get(),
+#         'phn':phn_entry.get(),
+#         'em':em_entry.get(),
+#         'addr':add_entry.get(),
+#         'ward':ward_entry.get(),
+#         'state':True
+#         })
  
-    #messagebox after update
-    messagebox.showinfo("Accounts","Updated fields successfully!")
-conn.commit()
-conn.close()
+#     #messagebox after update
+#     messagebox.showinfo("Accounts","Updated fields successfully!")
+# conn.commit()
+# conn.close()
 
 #delete function
 
