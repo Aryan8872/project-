@@ -2,7 +2,6 @@ from tkinter import *
 from PIL import ImageTk,Image
 from tkinter import messagebox
 import sqlite3
-from tkinter import messagebox
 
 root=Tk()
 root.geometry("900x600")
@@ -107,11 +106,6 @@ def login_action():
     result = c.fetchall()
     if result:
         messagebox.showinfo("Success", 'Logged in Successfully.')
-        # c.execute("""UPDATE register SET
-        #             status=:inactive
-        #             WHERE status=:active""",
-        #             {'inactive':False,
-        #             'active':True})
         conn.commit()
         c.execute("""UPDATE register SET
                     user_status= :condition
@@ -137,60 +131,12 @@ loginButton.place(x=140,y=400)
 ##############################################################################################################################################################
                                           #forgot password
 
+
+
+
 def forgotpass():
-    fp=Toplevel(root)
-    fp.config(bg="pink")
-
-    email_label=Label(fp,text="EMAIL",fg="green",bg="pink")
-    email_entry=Entry(fp,bg="pink",fg="black")
-    email_label.place(x=0,y=1)
-    email_entry.place(x=80,y=1)
-
-
-    newpass_label=Label(fp,text="NEW PASSWORD",bg="pink",fg="green")
-    newpass_entry=Entry(fp,bg="pink",fg="red")
-    newpass_label.place(x=0,y=30)
-    newpass_entry.place(x=100,y=30)
-
-    confirmpass_label=Label(fp,text="CONFIRM PASSWORD",fg="green",bg="pink")
-    confirmpass_entry=Entry(fp,bg="pink",fg="red")
-    confirmpass_label.place(x=0,y=60)
-    confirmpass_entry.place(x=120,y=60)
-
-
-   
-        
-  
-
-    def change_pass():
-        em=email_entry.get()
-        if newpass_entry.get() == confirmpass_entry.get():
-            conn = sqlite3.connect("registration.db")
-            c = conn.cursor()
-            c.execute("""UPDATE register SET 
-                'email'= :email_add,
-                password= :passwd
-                WHERE email = :em""",
-                {'email_add':email_entry.get(),
-                'passwd':newpass_entry.get()
-
-
-            }
-    )
-            
-            messagebox.showinfo('Congrats', 'Password changed successfully')
-        else:
-            messagebox.showerror('Error!', "Passwords didn't match")
-        conn.commit()
-        
-        conn.close()
-        
-
-
-      #save button
-    save_btn=Button(fp,text="SAVE",bg="pink",activebackground="pink",activeforeground="pink",fg="green",command=change_pass)
-    save_btn.place(x=10,y=120)
-    
+    login.destroy()
+    import forgot_pass
 #forgot password
 forgetButton=Button(frame,text='Forgot Password?',bd=0,font=("Helvetica 10 italic"),fg="deepskyblue2",bg='lavender',activebackground='lavender',activeforeground="deepskyblue2",cursor='hand2',command=forgotpass)
 forgetButton.place(x=360,y=345)

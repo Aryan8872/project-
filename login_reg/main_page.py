@@ -14,23 +14,13 @@ root=Tk()
 root.geometry("1920x1108")
 root.config(bg="lavender")
 
-def over_v():
-    root.destroy()
-    import overview
-
-def rep():
-    root.destroy()
-    import report
-
-def sts():
-    root.destroy()
-    import feedback
-
 def login():
     root.destroy()
     import login
 
-
+def feedbck():
+    root.destroy()
+    import feedback
 
 #top canvas
 topcan=Canvas(root,height=80,width=1800,bg="black")
@@ -74,14 +64,14 @@ myLable1.place(x=1000,y=170)
 myLable2 = Label(root, text="Tell us how we can make ourselves better for you!",font=("Microsoft Uighur",20),bg="Lavender",fg="deepskyblue2")
 myLable2.place(x=1000,y=280)
 
-feedback_btn=Button(root,text="Feedback",bg="Lavender",activebackground="lavender",activeforeground="deepskyblue2",fg="deepskyblue2",font=("Microsoft Uighur",15),command=sts)
+feedback_btn=Button(root,text="Feedback",bg="Lavender",activebackground="lavender",activeforeground="deepskyblue2",fg="deepskyblue2",font=("Microsoft Uighur",15),command=login)
 feedback_btn.place(x=1100,y=550,width=190,height=47)
 
 
 myLable2 = Label(root, text="MPR is a problem resolver site where we take in any of your municipal problems\nand forward them to respective authorities who will take action on it right away.",font=("Microsoft Uighur",20),bg="Lavender",fg="deepskyblue2")
 myLable2.place(x=70,y=280)
 
-getstart_btn=Button(root,text="Get Started",bg="Lavender",activebackground="lavender",activeforeground="deepskyblue2",fg="deepskyblue2",font=("Microsoft Uighur",15),command=rep)
+getstart_btn=Button(root,text="Get Started",bg="Lavender",activebackground="lavender",activeforeground="deepskyblue2",fg="deepskyblue2",font=("Microsoft Uighur",15),command=login)
 getstart_btn.place(x=150,y=500,width=190,height=47)
 
 contact_btn=Button(root,text="Contact us",bg="Lavender",activebackground="lavender",activeforeground="deepskyblue2",fg="deepskyblue2",font=("Microsoft Uighur",15))

@@ -42,14 +42,43 @@ logo_label2=Label(root,image=proj_logo2,bd=0,bg="black",height=60,width=150)
 logo_label2.place(x=0,y=10)
 
 #BUTTONS
-overview=Button(root,text="OVERVIEW",font=("Helvetica 15 bold"),bg="black",command=over_v,fg="red",bd=0)
+#overviewBUtton
+def on_enter(e):
+   overview.config(background='black', foreground= "red")
+
+def on_leave(e):
+   overview.config(background= 'black', foreground= 'white')
+
+overview=Button(root,text="OVERVIEW",font=("Helvetica 15 bold"),bg="black",command=over_v,fg="white",bd=0)
 overview.place(x=890,y=30)
+
+overview.bind('<Enter>', on_enter)
+overview.bind('<Leave>', on_leave)
+
+#ReportButton
+def on_enter(e):
+   report.config(background='black', foreground= "red")
+
+def on_leave(e):
+   report.config(background= 'black', foreground= 'white')
 
 report=Button(root,text="REPORT",font=("Helvetica 15 bold"),bg="black",fg="white",command=rep,bd=0)
 report.place(x=1050,y=30)
 
-status=Button(root,text="STATUS",font=("Helvetica 15 bold"),bg="black",fg="white",command=sts,bd=0)
-status.place(x=1200,y=30) 
+report.bind('<Enter>', on_enter)
+report.bind('<Leave>', on_leave)
+
+#StatusButton
+def on_enter(e):
+   status.config(background='black', foreground= "white")
+
+def on_leave(e):
+   status.config(background= 'black', foreground= 'red')
+status=Button(root,text="STATUS",font=("Helvetica 15 bold"),bg="black",fg="red",command=sts,bd=0)
+status.place(x=1200,y=30)
+
+status.bind('<Enter>', on_enter)
+status.bind('<Leave>', on_leave)
 
 #frame for status feature
 st_frame=LabelFrame(root,width=1920,height=200)
@@ -128,7 +157,7 @@ green_mean.place(x=1200,y=420)
 
 yellow=Label(root,text="YELLOW",bg="yellow",font=("Helvetica 11 bold"))
 yellow.place(x=1100,y=460)
-yellow_mean=Label(root,text="--No data!")
+yellow_mean=Label(root,text="--No data!",font=("Helvetica 9 bold"))
 yellow_mean.place(x=1200,y=460)
 
 
@@ -171,9 +200,9 @@ def change():
             messagebox.showerror("Error!","Username is not correct")
 
 
-#send button for sending request to admins
-send=Button(st_frame,text="SEND",bg="skyblue3",font=("Helvetica 12 bold"),width=15,command=change)
-send.place(x=1250,y=120)
+#request button for requesting status to admins
+request=Button(st_frame,text="Request Status",bg="skyblue3",font=("Helvetica 12 bold"),width=15,command=change)
+request.place(x=1250,y=120)
 
 def page_ref():            #it refreshes page by destroying window and again opening it
     root.destroy()
