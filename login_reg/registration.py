@@ -74,7 +74,7 @@ entryward.place(x=58,y=495)
 
 phn_entry=Entry(frame1,width=25,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="lavender")
 phn_entry.place(x=58,y=275)
-phn_entry.insert(0,"+977")
+
 
 
 var=IntVar
@@ -154,24 +154,50 @@ c.execute(""" CREATE TABLE IF NOT EXISTS register(
     )""")
 
 def add_rec():
-    conn=sqlite3.connect('registration.db')
-    c=conn.cursor()
-    c.execute("INSERT INTO register VALUES( :username, :password, :phone_num, :email, :add, :ward,  :gender, :user_status )",{
+    try:
+        global phn
+        phn=int(phn_entry.get())       
+    except ValueError:
+        messagebox.showwarning("error!","phone number is not an integer")
+    try:
+        global num
+        num=len(phn_entry.get())
+    except:
+        pass
 
-            'username':usernam_entry.get(),
-            'password':pass_entry.get(),
-            'phone_num':phn_entry.get(),
-            'email':entryemail.get(),
-            'add':addr_ent.get(),
-            'ward':entryward.get(),
-            'gender':gend,
-            'user_status':False
-           
-            })
-    conn.commit()
-    conn.close()
-    messagebox.showinfo("Success",'account created Successfully!')
-    open_login()
+    if  (usernam_entry.get()=='' or pass_entry.get()=='' or phn_entry.get()=='' or entryemail.get()=='' or entryward.get()==''):
+         messagebox.showerror("Error","one or more fields are empty")
+    elif usernam_entry.get()=='':
+        messagebox.showerror("Error","Empty username")
+    elif len(pass_entry.get())<=5:
+         messagebox.showerror("Error","Password should be more than 5 characters")
+    elif '@' not in entryemail.get()  or  ".com" not in entryemail.get():
+         messagebox.showerror("Error","Invalid email format")
+    elif num!=10:
+         messagebox.showerror("Error","Invalid phone number length")
+    # elif entryward.get() is not int:
+    #      messagebox.showerror("Error","Invalid ward number")
+    # elif gend=='':
+    #      messagebox.showerror("Error","Invalid gender")
+    else:
+        conn=sqlite3.connect('registration.db')
+        c=conn.cursor()
+        c.execute("INSERT INTO register VALUES( :username, :password, :phone_num, :email, :add, :ward,  :gender, :user_status )",{
+
+                'username':usernam_entry.get(),
+                'password':pass_entry.get(),
+                'phone_num':phn_entry.get(),
+                'email':entryemail.get(),
+                'add':addr_ent.get(),
+                'ward':entryward.get(),
+                'gender':gend,
+                'user_status':False
+            
+                })
+        conn.commit()
+        conn.close()
+        messagebox.showinfo("Success",'account created Successfully!')
+        open_login()
 
 #REGISTER BUTTON
 loginbotton=Button(frame1,text="Create Account",font=('Ariel', 20),padx=250,pady=4.5,borderwidth=0,bg="skyblue",fg="white",command=add_rec)
