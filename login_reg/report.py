@@ -24,7 +24,7 @@ def rep():
 
 def sts():
     root.destroy()
-    import feedback
+    import status
 
 
 #top canvas
@@ -71,23 +71,14 @@ status.place(x=1200,y=30)
 status.bind('<Enter>', on_enter)
 status.bind('<Leave>', on_leave)
 
-ov_line=Canvas(root,width=600,height=3,bg="black",highlightthickness=0)
-ov_line.place(x=1000,y=212)
 
-report_line=Canvas(root,width=600,height=3,bg="black",highlightthickness=0)
-report_line.place(x=1100,y=292)
-
-status_line=Canvas(root,width=600,height=3,bg="black",highlightthickness=0)
-status_line.place(x=1100,y=372)
-
-
-rep_frame=LabelFrame(root,width=1100,height=690,bg="lavender")
+rep_frame=LabelFrame(root,width=1920,height=1100,bg="lavender")
 rep_frame.place(x=0,y=80)
 
 
 #middle canvas
 middle=Canvas(rep_frame,width=3,height=470,bg="black")
-middle.place(x=520,y=100)
+middle.place(x=740,y=100)
 
 #bottom canvas
 bottomcan=Canvas(root,height=50,width=1800,bg="black")
@@ -117,53 +108,66 @@ logo_label2.place(x=0,y=10)
 
 #report here
 report_label=Label(rep_frame,text="REPORT",fg="deepskyblue2",bg="lavender",font=("Helvetica 35 bold"))
-report_label.place(x=450,y=0)
+report_label.place(x=650,y=0)
 
 date_sel=Label(rep_frame,text="Date:",fg="deepskyblue2",bg="lavender",font=("Helvetica 25 bold"))
-date_sel.place(x=950,y=20)
+date_sel.place(x=1300,y=50)
 
 cal=DateEntry(rep_frame,selectmode='day')
-cal.place(x=950,y=70)
+cal.place(x=1300,y=100)
 
 
 
 name=Label(rep_frame,text="Name of the reporter:-",fg="deepskyblue2",bg="lavender",font=("Helvetica 25 bold"))
-name.place(x=20,y=100)
+name.place(x=80,y=100)
 
 fn=Label(rep_frame,text="First Name",fg="deepskyblue2",bg="lavender",font=("Helvetica 15 bold"))
-fn.place(x=20,y=180)
+fn.place(x=80,y=180)
 
 fn_entry=Entry(rep_frame,fg="black",bg="white",bd=0,font=("Helvetica 15 bold"))
-fn_entry.place(x=20,y=210)
+fn_entry.place(x=80,y=210)
 
 ln=Label(rep_frame,text="Last Name",fg="deepskyblue2",bg="lavender",font=("Helvetica 15 bold"))
-ln.place(x=270,y=180)
+ln.place(x=360,y=180)
 
 ln_entry=Entry(rep_frame,fg="black",bd=0,font=("Helvetica 15 bold"))
-ln_entry.place(x=270,y=210)
+ln_entry.place(x=360,y=210)
 
 locat=Label(rep_frame,text="Location:",fg="deepskyblue2",bg="lavender",font=("Helvetica 25 bold"))
-locat.place(x=550,y=100)
+locat.place(x=830,y=100)
 
 ward=Label(rep_frame,text="Ward No.:",fg="deepskyblue2",bg="lavender",font=("Helvetica 15 bold"))
-ward.place(x=550,y=180)
+ward.place(x=830,y=180)
 
 ward_entry=Entry(rep_frame,fg="black",bd=0,font=("Helvetica 15 bold"))
-ward_entry.place(x=550,y=210)
+ward_entry.place(x=830,y=210)
 
 tole=Label(rep_frame,text="Tole:",fg="deepskyblue2",bg="lavender",font=("Helvetica 15 bold"))
-tole.place(x=810,y=180)
+tole.place(x=1100,y=180)
 
 tole_entry=Entry(rep_frame,fg="black",bd=0,font=("Helvetica 15 bold"))
-tole_entry.place(x=810,y=210)
+tole_entry.place(x=1100,y=210)
 
 
 issue=Label(rep_frame,text="Issues Related to:",fg="deepskyblue2",bg="lavender",font=("Helvetica 20 bold"))
-issue.place(x=20,y=300)
+issue.place(x=80,y=300)
+#dropbox
+options=[
+    "Garbage",
+    "Homeless",
+    "Road",
+    "Managment",
+    "Other"
+]
+click=StringVar()
+click.set("Garbage")
+drop=OptionMenu(root,click,*options)
+drop.place(x=80,y=450)
+drop.config(width=25,background='deepskyblue2',foreground="lavender",font=("Helvetica 14 bold"))
+
 
 level=Label(rep_frame,text="Level of severity:",fg="deepskyblue2",bg="lavender",font=("Helvetica 20 bold"))
-level.place(x=550,y=280)
-
+level.place(x=830,y=280)
 
 
 sev = StringVar()
@@ -172,35 +176,60 @@ sev.set(" ")
 def clicked():
     global sevr
     sevr=sev.get()
-Radiobutton(rep_frame,text="Low",font=('Ariel', 17),fg="deepskyblue2",background="lavender",variable=sev,value="LOW",command=clicked).place(x=550,y=330)
-Radiobutton(rep_frame,text="Moderate",font=('Ariel', 17),fg="deepskyblue2",background="lavender",variable=sev,value="MODERATE",command=clicked).place(x=650,y=330)
-Radiobutton(rep_frame,text="Critical",font=('Ariel', 17),fg="deepskyblue2",background="lavender",variable=sev,value="CRITCIAL",command=clicked).place(x=810,y=330)
+Radiobutton(rep_frame,text="Low",font=('Ariel', 17),fg="deepskyblue2",background="lavender",variable=sev,value="LOW",command=clicked).place(x=830,y=330)
+Radiobutton(rep_frame,text="Moderate",font=('Ariel', 17),fg="deepskyblue2",background="lavender",variable=sev,value="MODERATE",command=clicked).place(x=940,y=330)
+Radiobutton(rep_frame,text="Critical",font=('Ariel', 17),fg="deepskyblue2",background="lavender",variable=sev,value="CRITCIAL",command=clicked).place(x=1100,y=330)
 
 descp=Label(rep_frame,text="Descriptive Explanation",fg="deepskyblue2",background="lavender",font=("Helvetica 20 bold"))
-descp.place(x=550,y=400)
+descp.place(x=830,y=400)
 
 box=Text(rep_frame,width=50,height=6,bg="white",font=("Ariel 13 bold"))
-box.place(x=550,y=450)
+box.place(x=830,y=450)
 
 
 
 
 
-##ACCOUNT VIEWING FEATURE 
-conn=sqlite3.connect("issues.db")
-c=conn.cursor()
-c.execute("""CREATE TABLE IF NOT EXISTS issues(
-    date integer,
-    urgency string,
-    phone_number integer
-    
 
-)""")
 def acc():
     import account_view
 
 account=Button(root,text="ACCOUNT",font=("Helvetica 15 bold"),command=acc,bd=0,fg="blue",bg="black",activebackground="black")
 account.place(x=1390,y=30)
+
+conn=sqlite3.connect('report.db')
+c=conn.cursor()
+c.execute(""" CREATE TABLE IF NOT EXISTS rep(
+        first_name text,
+        last_nametext,
+        ward_no integer,
+        tole text,
+        issue text,
+        description text,
+        level text,
+        date integer
+    )""")
+def submit():
+    conn=sqlite3.connect('report.db')
+    c=conn.cursor()
+    c.execute("INSERT INTO rep VALUES( :first_name,:last_name,:ward_no,:tole,:issue,:description,:level,:date )",{
+
+          'first_name':fn_entry.get(),
+          'last_name':ln_entry.get(),
+          'ward_no':ward_entry.get(),
+          'tole':tole_entry.get(),
+          'issue':click.get(),
+          'description':box.get(1.0,END),
+          'level':sev.get(),
+          'date':cal.get_date()
+        })
+    conn.commit()
+    conn.close()
+    messagebox.showinfo("Success",'ReportedSuccessfully!')
+
+
+submitbtn=Button(root,text="Report",font=("Helvetica 15 bold"),fg="lavender",bg="deepskyblue2",activeforeground="lavender",activebackground="deepskyblue2",width=25,command=submit)
+submitbtn.place(x=600,y=680)
 
 # textbox=Text(root,width=20,height=20)
 # textbox.pack()
