@@ -5,11 +5,8 @@ import sqlite3
 from tkinter import messagebox
 from tkcalendar import DateEntry
 from tkinter import font
+from tkinter import filedialog
  
-
-
-
-
 root=Tk()
 root.geometry("1920x1108")
 root.config(bg="lavender")
@@ -97,11 +94,11 @@ title3=Label(root,text="RESOLVER",bg="black",fg="lavender",font=("Helvetica 20 b
 title3.place(x=487,y=18)
 
 #project logo
-proj_logo=ImageTk.PhotoImage(Image.open("main_logo.png"))
+proj_logo=ImageTk.PhotoImage(Image.open("images\\main_logo.png"))
 logo_label=Label(root,image=proj_logo,bd=0,bg="black",height=70)
 logo_label.place(x=640,y=5)
 
-proj_logo2=ImageTk.PhotoImage(Image.open("second.png"))
+proj_logo2=ImageTk.PhotoImage(Image.open("images\\second.png"))
 logo_label2=Label(root,image=proj_logo2,bd=0,bg="black",height=60,width=150)
 logo_label2.place(x=0,y=10)
 
@@ -148,9 +145,9 @@ tole.place(x=1100,y=180)
 tole_entry=Entry(rep_frame,fg="black",bd=0,font=("Helvetica 15 bold"))
 tole_entry.place(x=1100,y=210)
 
-
 issue=Label(rep_frame,text="Issues Related to:",fg="deepskyblue2",bg="lavender",font=("Helvetica 20 bold"))
 issue.place(x=80,y=300)
+
 #dropbox
 options=[
     "Garbage",
@@ -188,26 +185,31 @@ box.place(x=830,y=450)
 
 
 
-
-
-
 def acc():
     import account_view
 
 account=Button(root,text="ACCOUNT",font=("Helvetica 15 bold"),command=acc,bd=0,fg="blue",bg="black",activebackground="black")
 account.place(x=1390,y=30)
 
+
+
+
+
+
+
+
 conn=sqlite3.connect('report.db')
 c=conn.cursor()
 c.execute(""" CREATE TABLE IF NOT EXISTS rep(
         first_name text,
-        last_nametext,
+        last_name text,
         ward_no integer,
         tole text,
         issue text,
         description text,
         level text,
         date integer
+
     )""")
 def submit():
     conn=sqlite3.connect('report.db')
@@ -231,19 +233,5 @@ def submit():
 submitbtn=Button(root,text="Report",font=("Helvetica 15 bold"),fg="lavender",bg="deepskyblue2",activeforeground="lavender",activebackground="deepskyblue2",width=25,command=submit)
 submitbtn.place(x=600,y=680)
 
-# textbox=Text(root,width=20,height=20)
-# textbox.pack()
-# def submit(): 
 
-#     textfile=open("data.txt",'a')
-#     saved=textfile.write(textbox.get(1.0,END))
-#     textbox.insert(END,saved)
-#     global myimage
-#     myimage=filedialog.askopenfilename(initialdir="/",filetypes=(("images","*.jpg"),))
-#     file_path=myimage
-#     imag=PhotoImage(file=file_path)
-#     textbox.image_create(END,image=imag)
-
-# butn=Button(root,text="submit",command=submit)
-# butn.pack()
 root.mainloop()

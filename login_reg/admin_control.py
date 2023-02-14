@@ -5,7 +5,7 @@ from tkinter import messagebox
 root=Tk()
 root.geometry("1920x1108")
 
-root_bg=ImageTk.PhotoImage(Image.open("logo-white (4).png"))
+root_bg=ImageTk.PhotoImage(Image.open("images\\logo-white (4).png"))
 bg=Label(root,image=root_bg)
 bg.place(x=1120,y=0)
 
@@ -23,7 +23,6 @@ bottomcan.place(x=0,y=750)
 
 
 #project title on black canvas
-
 title1=Label(root,text="MUNICIPAL",bg="black",fg="lavender",font=("Helvetica 20 bold"))
 title1.place(x=160,y=18)
 
@@ -37,11 +36,11 @@ title4=Label(root,text="ADMIN'S PAGE",bg="black",fg="lavender",font=("Helvetica 
 title4.place(x=800,y=18)
 
 #project logo on black canvas
-proj_logo=ImageTk.PhotoImage(Image.open("main_logo.png"))
+proj_logo=ImageTk.PhotoImage(Image.open("images\\main_logo.png"))
 logo_label=Label(root,image=proj_logo,bd=0,bg="black",height=70)
 logo_label.place(x=640,y=5)
 
-proj_logo2=ImageTk.PhotoImage(Image.open("second.png"))
+proj_logo2=ImageTk.PhotoImage(Image.open("images\\second.png"))
 logo_label2=Label(root,image=proj_logo2,bd=0,bg="black",height=60,width=150)
 logo_label2.place(x=0,y=10)
 
@@ -68,19 +67,19 @@ pg_entry.place(x=60,y=190)
 
 #progress indicator
 blue=Label(frame1,bg="blue",text="BLUE",font=("Helvetica 11 bold"))
-blue.place(x=350,y=200)
+blue.place(x=250,y=100)
 blue_mean=Label(frame1,text="--REPORT RECEIVED",font=("Helvetica 9 bold"))
-blue_mean.place(x=430,y=200)
+blue_mean.place(x=300,y=100)
 
 red=Label(frame1,text="RED",bg="red",font=("Helvetica 11 bold"))
-red.place(x=350,y=240)
+red.place(x=250,y=140)
 red_mean=Label(frame1,text="--HELP IS ON THE WAY",font=("Helvetica 9 bold"))
-red_mean.place(x=430,y=240)
+red_mean.place(x=300,y=140)
 
 green=Label(frame1,text="GREEN",bg="green",font=("Helvetica 11 bold"))
-green.place(x=350,y=280)
+green.place(x=250,y=180)
 green_mean=Label(frame1,text="--PROBLEM RESOLVED",font=("Helvetica 9 bold"))
-green_mean.place(x=430,y=280)
+green_mean.place(x=320,y=180)
 
 
 def refresh():
@@ -122,9 +121,10 @@ change_btn.place(x=60,y=220)
 
 #table for problem status
 def tbl():
+ 
     table=LabelFrame(frame1,height=580,width=950,bg='white')
     table.place(x=30,y=360)
-
+  
     try:
         #try fetching data from database
         conn=sqlite3.connect('status.db')
@@ -185,11 +185,13 @@ def tbl():
             e.grid(row=i,column=j)
             e.insert(0,lst[i][j])
             e.config(state=DISABLED)
+           
 
 #calling table function
 tbl()
 
 
+#table for registration database
 def tbl2():
     table2=LabelFrame(frame1,height=580,width=650,bg='white')
     table2.place(x=620,y=360)
@@ -261,14 +263,117 @@ def tbl2():
 tbl2()
 
 
+#table for  report database
+def tbl3():
+    table3=LabelFrame(frame1,height=580,width=650,bg='white')
+    table3.place(x=480,y=160)
+
+    try:
+        #try fetching data from database
+        conn=sqlite3.connect('report.db')
+        c=conn.cursor()
+        c.execute("SELECT * from rep")
+        lst3=c.fetchall()
+        conn.commit()
+        conn.close()
+    except:
+        #empty list if list doesn't exist
+        lst3=[]
+    finally:
+        #Table headings
+        lst3.insert(0,('First name','Last name' , 'Ward num' , 'Tole', 'Issue', 'Description', 'Level','Date'))
+        print(lst3)
+    #creating a table
+    total_rows3 =len(lst3)
+    total_columns3=len(lst3[0])
+    for i in range(total_rows3):
+        if i==0:
+            #table heading
+            fontt=('Arial',10,'bold')
+            jus=CENTER
+            bgc ='#9cc2e5'
+        else:
+            #table data
+            fontt=('Arial',10)
+            jus=LEFT
+            bgc='white'
+        for j in range(total_columns3):
+            #width for all columns
+            if j==0:
+                wid=10
+            elif j==1:
+                wid=10
+            elif j==2:
+                wid=5
+            elif j==3:
+                wid=9
+            elif j==4:
+                wid=10
+            elif j==5:
+                wid=30
+            elif j==6:
+                wid=8
+            elif j==7:
+                wid=10
+            elif j==8:
+                wid=10
+            else:
+                wid=5
+            f=Entry(
+                table3,
+                width=wid,
+                font=fontt,
+                justify=jus,
+                disabledforeground='black',
+                disabledbackground=bgc
+            )
+            f.grid(row=i,column=j)
+            f.insert(0,lst3[i][j])
+            f.config(state=DISABLED)
+
+#calling table function
+tbl3()
 
 
+def editstatus():
+    sts=Toplevel()
+    sts.geometry("200x200")
+    label1=Label(sts,text="ENTER THE OID")
+    label1.place(x=0,y=0)
+    entry1=Entry(sts,font=("Helvetica 9 bold"))
+    entry1.place(x=0,y=20)
+    def del_rec():
+        conn=sqlite3.connect("status.db")
+        c=conn.cursor()
+        c.execute("DELETE from status WHERE oid = " + entry1.get())
+        conn.commit()
+        conn.close()
+        messagebox.showinfo("sucess","deleted sucessfully!")
+    btn1=Button(sts,text="DELETE",font=("Helvetica 9 bold"),bg="red",fg="white",command=del_rec)
+    btn1.place(x=0,y=40)
 
+edit_sts=Button(root,text="Edit status table",bg="green",fg="white",font=("Helvetica 9 bold"),command=editstatus)
+edit_sts.place(x=1220,y=530)
 
+def editreport():
+     rept=Toplevel()
+     rept.geometry("200x200")
+     label1=Label(rept,text="ENTER THE OID")
+     label1.place(x=0,y=0)
+     entry1=Entry(rept,font=("Helvetica 9 bold"))
+     entry1.place(x=0,y=20)
+     def del_rep():
+        conn=sqlite3.connect("report.db")
+        c=conn.cursor()
+        c.execute("DELETE from rep WHERE oid = " + entry1.get())
+        conn.commit()
+        conn.close()
+        messagebox.showinfo("sucess","deleted sucessfully!")
+     btn1=Button(rept,text="DELETE",font=("Helvetica 9 bold"),bg="red",fg="white",command=del_rep)
+     btn1.place(x=0,y=40)
 
-
-
-
+edit_repo=Button(root,text="Edit report table",bg="green",fg="white",font=("Helvetica 9 bold"),command=editreport)
+edit_repo.place(x=1350,y=530)
 
 
 

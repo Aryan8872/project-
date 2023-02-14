@@ -9,6 +9,7 @@ root.geometry("1200x700")
 # root.iconbitmap('Capture.ico')
 root.configure(background='lavender')
 
+
 def open_login():
     root.destroy()
     import login
@@ -120,7 +121,7 @@ mycanvas12=Canvas(frame1,width=300,height=1,background="black")
 mycanvas12.place(x=450,y=420)
 
 
-    #radio button to select gender of user
+#radio button to select gender of user
 gender=Label(frame1,text="GENDER",font=('Ariel', 17),fg="skyblue",background="lavender")
 gender.place(x=445,y=440)
 gen = StringVar()
@@ -154,11 +155,14 @@ c.execute(""" CREATE TABLE IF NOT EXISTS register(
     )""")
 
 def add_rec():
+    #converting default data type of entry box into integer if user inputs integer number
     try:
         global phn
         phn=int(phn_entry.get())       
     except ValueError:
         messagebox.showwarning("error!","phone number is not an integer")
+
+    #getting length of phone number if the phone number is integer
     try:
         global num
         num=len(phn_entry.get())
@@ -175,31 +179,45 @@ def add_rec():
          messagebox.showerror("Error","Invalid email format")
     elif num!=10:
          messagebox.showerror("Error","Invalid phone number length")
-    # elif entryward.get() is not int:
-    #      messagebox.showerror("Error","Invalid ward number")
-    # elif gend=='':
-    #      messagebox.showerror("Error","Invalid gender")
-    else:
-        conn=sqlite3.connect('registration.db')
-        c=conn.cursor()
-        c.execute("INSERT INTO register VALUES( :username, :password, :phone_num, :email, :add, :ward,  :gender, :user_status )",{
+  
+    
 
-                'username':usernam_entry.get(),
-                'password':pass_entry.get(),
-                'phone_num':phn_entry.get(),
-                'email':entryemail.get(),
-                'add':addr_ent.get(),
-                'ward':entryward.get(),
-                'gender':gend,
-                'user_status':False
-            
-                })
-        conn.commit()
-        conn.close()
-        messagebox.showinfo("Success",'account created Successfully!')
-        open_login()
+    #converting default data type of entry box into integer so that  we can verify if the input is integer or not
+    try:
+        global wd
+        wd=int(entryward.get())       
+    except ValueError:
+        messagebox.showwarning("error!","Please enter integer in ward field")
+
+    else:
+        try:
+            conn=sqlite3.connect('registration.db')
+            c=conn.cursor()
+            c.execute("INSERT INTO register VALUES( :username, :password, :phone_num, :email, :add, :ward,  :gender, :user_status )",{
+
+                    'username':usernam_entry.get(),
+                    'password':pass_entry.get(),
+                    'phone_num':phn_entry.get(),
+                    'email':entryemail.get(),
+                    'add':addr_ent.get(),
+                    'ward':entryward.get(),
+                    'gender':gend,
+                    'user_status':False
+                
+                    })
+            conn.commit()
+            conn.close()
+            messagebox.showinfo("Success",'account created Successfully!')
+            open_login()
+        
+        #returns error if the user doesnot input gender
+        except NameError: 
+            messagebox.showerror("Error","Enter your gender")
+
 
 #REGISTER BUTTON
 loginbotton=Button(frame1,text="Create Account",font=('Ariel', 20),padx=250,pady=4.5,borderwidth=0,bg="skyblue",fg="white",command=add_rec)
 loginbotton.place(x=45,y=605)
+
+
 root.mainloop()

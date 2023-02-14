@@ -17,6 +17,7 @@ root.minsize(900,600)
 
 
 
+
 # importing main_page inside a function
 def overview_page():
     root.destroy()
@@ -90,7 +91,6 @@ pw_entry.bind('<FocusOut>',on_enter2)
 # eyeButton.place(x=610,y=345)
 
 
-
 #===================================================================================================================================
                              #DATABASE CONNECTION for LOGIN PAGE
 
@@ -100,8 +100,8 @@ def login_action():
 
     if un_entry.get()=='' or pw_entry.get()=='':
         messagebox.showinfo("error","one or more fields are empty")
-    else:
-            
+        
+    else:            
         conn = sqlite3.connect("registration.db")
         c = conn.cursor()
 

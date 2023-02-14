@@ -33,11 +33,11 @@ resl=Label(root,text="RESOLVER",bg="black",fg="lavender",font=("Helvetica 20 bol
 resl.place(x=487,y=18)
 
 #project logo
-proj_logo=ImageTk.PhotoImage(Image.open("main_logo.png"))
+proj_logo=ImageTk.PhotoImage(Image.open("images\\main_logo.png"))
 logo_label=Label(root,image=proj_logo,bd=0,bg="black",height=70)
 logo_label.place(x=640,y=5)
 
-proj_logo2=ImageTk.PhotoImage(Image.open("second.png"))
+proj_logo2=ImageTk.PhotoImage(Image.open("images\\second.png"))
 logo_label2=Label(root,image=proj_logo2,bd=0,bg="black",height=60,width=150)
 logo_label2.place(x=0,y=10)
 
@@ -133,13 +133,22 @@ bottomcan.place(x=0,y=750)
 
 #Guiding lines
 
-label1=Label(root,text="STEP-1: Enter the above mentioned data with a valid username",font=("Helvetica 15 bold"))
-label1.place(x=300,y=340)
+label1=Label(root,text="STEP-1: Enter the above mentioned data with a valid username first name and last name",font=("Helvetica 15 bold"))
+label1.place(x=100,y=340)
 
-label2=Label(root,text="STEP-2: After submitting the valid data, we will notify you!",font=("Helvetica 15 bold"))
-label2.place(x=300,y=390)
+label2=Label(root,text="STEP-2: After entering  valid data, press request status buttton to request status!",font=("Helvetica 15 bold"))
+label2.place(x=100,y=390)
+
+label3=Label(root,text="STEP-3: After your request is registered admins will notify you ",font=("Helvetica 15 bold"))
+label3.place(x=100,y=440)
+
+label3=Label(root,text="NOTE: You can check status by pressing check button and you can only request once at a time",font=("Helvetica 15 bold"))
+label3.place(x=100,y=490)
 
 #color indication
+index=Label(root,bg="lavender",text="STATUS INDEX",font=("Helvetica 14 bold"))
+index.place(x=1100,y=300)
+
 blue=Label(root,bg="blue",text="BLUE",font=("Helvetica 11 bold"))
 blue.place(x=1100,y=340)
 blue_mean=Label(root,text="--REPORT RECEIVED",font=("Helvetica 9 bold"))
@@ -166,8 +175,8 @@ conn=sqlite3.connect("status.db")
 c=conn.cursor()
 c.execute("""CREATE TABLE IF NOT EXISTS status(
     user_name text PRIMARY KEY,
-    first_name text,
-    last_name text,
+    first_name text PRIMARY KEY,
+    last_name text PRIMARY KEY,
     problem_status text
 
 )""")
@@ -176,28 +185,38 @@ conn.close()
 
 #inserting data into database so that status can be checked
 def change():
+    con=sqlite3.connect("report.db")
+    d=con.cursor()
+    d.execute("SELECT * from rep WHERE first_name=? and last_name=? ",[(fn_entry.get()),(ln_entry.get())])
+    report=d.fetchall()
     
     conn=sqlite3.connect("registration.db")           
     c=conn.cursor()
-    c.execute("SELECT * from register")                 #selecting all data from registration database for verification
+    c.execute("SELECT * from register WHERE user_name=?",[(un_entry.get())])  #selecting all data from registration database for verification
     record=c.fetchall()
-    if (un_entry.get()==record[0][0]):  
-                                                    #if data exists then status can be checked
-        conn=sqlite3.connect("status.db")
-        c=conn.cursor()
-        c.execute("INSERT INTO status VALUES(:username,:firstname,:lastname,:problem_status)",{
+    if record and report: 
 
-                'username':un_entry.get(),
-                'firstname':fn_entry.get(),
-                'lastname':ln_entry.get(),
-                'problem_status':"blue"           
-            })
+        try:                                            #if data exists then status can be checked
+            conn=sqlite3.connect("status.db")
+            c=conn.cursor()
+            c.execute("INSERT INTO status VALUES(:username,:firstname,:lastname,:problem_status)",{
 
-        conn.commit()
-        conn.close()
-        messagebox.showinfo('Success',"Data exists!")
-    else:
-            messagebox.showerror("Error!","Username is not correct")
+                    'username':un_entry.get(),
+                    'firstname':fn_entry.get(),
+                    'lastname':ln_entry.get(),
+                    'problem_status':"blue"           
+                })
+
+            conn.commit()
+            conn.close()
+            messagebox.showinfo('Success',"Request registered!")
+        except sqlite3.IntegrityError:
+            messagebox.showerror("error","request already exists")
+        
+    elif not report:
+            messagebox.showerror("Error!","Enter valid first name and last name")
+    elif not record:
+            messagebox.showerror("Error!","Enter valid username")
 
 
 #request button for requesting status to admins
@@ -208,5 +227,5 @@ def page_ref():            #it refreshes page by destroying window and again ope
     root.destroy()
     import status
 refresh_button=Button(root,text="REFRESH",fg="lavender",bg="green",font=("Helvetica 12 bold"),width=15,command=page_ref)
-refresh_button.place(x=500,y=460)
+refresh_button.place(x=500,y=560)
 root.mainloop()

@@ -5,39 +5,43 @@ from PIL import Image,ImageTk
 
 
 
-#create a window
-root=Toplevel()
-root.geometry("1280x720")
-root.title("Accounts")
-root.config(bg="lavender")
 
-topcan=Canvas(root,height=80,width=1800,bg="black")
+#create a window
+acc=Tk()
+acc.geometry("1280x720")
+acc.title("Accounts")
+acc.config(bg="lavender")
+
+topcan=Canvas(acc,height=80,width=1800,bg="skyblue2")
 topcan.place(x=0,y=0)
 
-title1=Label(root,text="MUNICIPAL",bg="black",fg="lavender",font=("Helvetica 20 bold"))
+
+# logo=PhotoImage(file="logo-black(7).png")
+# logo1=Label(topcan,image=logo,bd=0,bg="lavender")
+# logo1.place(x=500,y=55)
+
+
+
+# logo_2=ImageTk.PhotoImage(Image.open("logo-(8).png"))
+# logo2=Label(acc,image=logo_2,bd=0,bg="skyblue2",height=90)
+# logo2.place(x=0,y=-8)
+
+title1=Label(acc,text="MUNICIPAL",bg="skyblue2",fg="lavender",font=("Helvetica 20 bold"))
 title1.place(x=160,y=18)
 
-title2=Label(root,text="PROBLEM",bg="black",fg="lavender",font=("Helvetica 20 bold"))
+title2=Label(acc,text="PROBLEM",bg="skyblue2",fg="lavender",font=("Helvetica 20 bold"))
 title2.place(x=330,y=18)
 
-title3=Label(root,text="RESOLVER",bg="black",fg="lavender",font=("Helvetica 20 bold"))
+title3=Label(acc,text="RESOLVER",bg="skyblue2",fg="lavender",font=("Helvetica 20 bold"))
 title3.place(x=487,y=18)
 
 
-#project logo
-logo=ImageTk.PhotoImage(Image.open("main_logo.png"))
-logo1=Label(root,image=logo,bd=0,bg="black",height=70)
-logo1.place(x=640,y=5)
-
-logo_2=ImageTk.PhotoImage(Image.open("second.png"))
-logo2=Label(root,image=logo_2,bd=0,bg="black",height=60,width=150)
-logo2.place(x=0,y=10)
-
-
-
+#your account label
+your_acc=Label(acc,text="YOUR ACCOUNT",font=('Arial',20,'bold'),bg="lavender")
+your_acc.place(x=620,y=110)
 
 #Frame for account details
-frame=LabelFrame(root, height=450, width=450, bg='skyblue')
+frame=LabelFrame(acc, height=450, width=450, bg='skyblue')
 frame.place(x=500, y=150)
 
 #label for account details
@@ -149,51 +153,55 @@ def logout():
         conn.commit()
         conn.close()
         if msb=='yes':
-            root.destroy()
+            acc.destroy()
             import login
         elif msb=='No':
-
             import account_view
+
     
         
   
       
 
-logout_btn=Button(root,text="LOGOUT",font=('Arial',10,'bold'),fg='white',bg="black",width=12,height=2,cursor='hand2',command=logout).place(x=860, y=640) 
+logout_btn=Button(acc,text="LOGOUT",font=('Arial',10,'bold'),fg='white',bg="black",width=12,height=2,cursor='hand2',command=logout).place(x=860, y=640) 
 
 #verification for update
  
 
-# #update function
-# def update():
-#     conn=sqlite3.connect("registration.db")
-#     c=conn.cursor()
-#     c.execute("""UPDATE register SET 
-#         password= :pass,
-#         phone_num= :phn,
-#         email= :em,
-#         address= :addr,
-#         ward no= :ward,
-#         gender= :gen,
-#         WHERE  user_status= :state,""",
-#         {
-#         'pass':pwd_entry.get(),
-#         'phn':phn_entry.get(),
-#         'em':em_entry.get(),
-#         'addr':add_entry.get(),
-#         'ward':ward_entry.get(),
-#         'state':True
-#         })
+#update function
+def update():
+     conn=sqlite3.connect("registration.db")
+     c=conn.cursor()
+     c.execute("""UPDATE register SET 
+         user_name= :un,
+         password= :pass,
+         phone_num= :phn,
+         email= :em,
+         address= :addr,
+         ward= :ward,
+         gender=:gen
+         WHERE  user_status= :state""",
+         {
+         'un':un_entry.get(),   
+         'pass':pwd_entry.get(),
+         'phn':phn_entry.get(),
+         'em':em_entry.get(),
+         'addr':add_entry.get(),
+         'ward':ward_entry.get(),
+         'gen':gender_entry.get(),
+         'state':True
+         })
  
 #     #messagebox after update
-#     messagebox.showinfo("Accounts","Updated fields successfully!")
-# conn.commit()
-# conn.close()
+     messagebox.showinfo("Accounts","Updated fields successfully!")
+     conn.commit()
+     conn.close()
 
+updte_btn=Button(acc,text="UPDATE",font=('Arial',10,'bold'),fg='white',bg="black",width=12,height=2,cursor='hand2',command=update).place(x=700, y=640) 
 #delete function
 
 
 #update, delete and logout function
 
 
-root.mainloop()
+acc.mainloop()

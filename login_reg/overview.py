@@ -2,17 +2,13 @@ from tkinter import *
 from PIL import ImageTk,Image
 from tkinter import messagebox
 import sqlite3
-from tkinter import messagebox
 from tkcalendar import DateEntry
-from tkinter import font
- 
+
 overview=Tk()
 overview.geometry("1920x1108")
 overview.config(bg="lavender")
 
-def over_v():
-    overview.destroy()
-    import overview
+
 
 def rep():
     overview.destroy()
@@ -26,12 +22,13 @@ def feedbck():
     overview.destroy()
     import feedback
 
+def acc():
+    import account_view
+
+
 #top canvas
 topcan=Canvas(overview,height=80,width=1800,bg="black")
 topcan.place(x=0,y=0)
-
-
-
 
 #middle canvas
 middle=Canvas(overview,width=3,height=650,bg="black")
@@ -54,11 +51,11 @@ title3=Label(overview,text="RESOLVER",bg="black",fg="lavender",font=("Helvetica 
 title3.place(x=487,y=18)
 
 #project logo
-proj_logo=ImageTk.PhotoImage(Image.open("main_logo.png"))
+proj_logo=ImageTk.PhotoImage(Image.open("images\\main_logo.png"))
 logo_label=Label(overview,image=proj_logo,bd=0,bg="black",height=70)
 logo_label.place(x=640,y=5)
 
-proj_logo2=ImageTk.PhotoImage(Image.open("second.png"))
+proj_logo2=ImageTk.PhotoImage(Image.open("images\\second.png"))
 logo_label2=Label(overview,image=proj_logo2,bd=0,bg="black",height=60,width=150)
 logo_label2.place(x=0,y=10)
 
@@ -87,8 +84,7 @@ status_button.place(x=150,y=600,width=190,height=47)
 
 
 
-def acc():
-    import account_view
+
 
 
 account=Button(overview,text="ACCOUNT",font=("Helvetica 15 bold"),command=acc,bd=0,fg="blue",bg="black",activebackground="black")
