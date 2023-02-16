@@ -23,6 +23,7 @@ def feedbck():
     import feedback
 
 def acc():
+    overview.destroy()
     import account_view
 
 

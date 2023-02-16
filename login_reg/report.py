@@ -186,6 +186,7 @@ box.place(x=830,y=450)
 
 
 def acc():
+    root.destroy()
     import account_view
 
 account=Button(root,text="ACCOUNT",font=("Helvetica 15 bold"),command=acc,bd=0,fg="blue",bg="black",activebackground="black")

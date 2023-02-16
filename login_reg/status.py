@@ -80,6 +80,13 @@ status.place(x=1200,y=30)
 status.bind('<Enter>', on_enter)
 status.bind('<Leave>', on_leave)
 
+def acc():
+    root.destroy()
+    import account_view
+
+account=Button(root,text="ACCOUNT",font=("Helvetica 15 bold"),command=acc,bd=0,fg="blue",bg="black",activebackground="black")
+account.place(x=1390,y=30)
+
 #frame for status feature
 st_frame=LabelFrame(root,width=1920,height=200)
 st_frame.place(x=0,y=80)
@@ -142,8 +149,8 @@ label2.place(x=100,y=390)
 label3=Label(root,text="STEP-3: After your request is registered admins will notify you ",font=("Helvetica 15 bold"))
 label3.place(x=100,y=440)
 
-label3=Label(root,text="NOTE: You can check status by pressing check button and you can only request once at a time",font=("Helvetica 15 bold"))
-label3.place(x=100,y=490)
+label4=Label(root,text="NOTE: You can check status by pressing check button and you can only request once at a time",font=("Helvetica 15 bold"))
+label4.place(x=100,y=490)
 
 #color indication
 index=Label(root,bg="lavender",text="STATUS INDEX",font=("Helvetica 14 bold"))

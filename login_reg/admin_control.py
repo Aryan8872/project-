@@ -46,11 +46,11 @@ logo_label2.place(x=0,y=10)
 
 
 #Entering problem solved username
-Labe1=Label(frame1,text="# ENTER PROBLEM RESOLVED USER'S USERNAME",font=("Helvetica 15 bold"))
+Labe1=Label(frame1,text="# ENTER PROBLEM RESOLVED USER'S USERNAME",font=("Helvetica 15 bold"),bg="lavender")
 Labe1.place(x=60,y=40)
 
 #username label
-un_label=Label(frame1,text="Username",font=("Helvetica 13 bold"))
+un_label=Label(frame1,text="Username",font=("Helvetica 13 bold"),bg="lavender")
 un_label.place(x=60,y=90)
 
 #username entry
@@ -58,7 +58,7 @@ un_entry=Entry(frame1,font=("Helvetica 11 bold"))
 un_entry.place(x=60,y=120)
 
 #progress
-pg=Label(frame1,text="#Progress",font=("Helvetica 13 bold"))
+pg=Label(frame1,text="#Progress",font=("Helvetica 13 bold"),bg="lavender")
 pg.place(x=60,y=160)
 
 #progress entry
@@ -66,20 +66,20 @@ pg_entry=Entry(frame1,font=("Helvetica 11 bold"))
 pg_entry.place(x=60,y=190)
 
 #progress indicator
-blue=Label(frame1,bg="blue",text="BLUE",font=("Helvetica 11 bold"))
+blue=Label(frame1,bg="blue",text=" ",font=("Helvetica 11 bold"),padx=10)
 blue.place(x=250,y=100)
-blue_mean=Label(frame1,text="--REPORT RECEIVED",font=("Helvetica 9 bold"))
-blue_mean.place(x=300,y=100)
+blue_mean=Label(frame1,text="= REPORT RECEIVED",font=("Helvetica 9 bold"),bg="lavender")
+blue_mean.place(x=280,y=100)
 
-red=Label(frame1,text="RED",bg="red",font=("Helvetica 11 bold"))
+red=Label(frame1,text=" ",bg="red",font=("Helvetica 11 bold"),padx=10)
 red.place(x=250,y=140)
-red_mean=Label(frame1,text="--HELP IS ON THE WAY",font=("Helvetica 9 bold"))
-red_mean.place(x=300,y=140)
+red_mean=Label(frame1,text="= HELP IS ON THE WAY",font=("Helvetica 9 bold"),bg="lavender")
+red_mean.place(x=280,y=140)
 
-green=Label(frame1,text="GREEN",bg="green",font=("Helvetica 11 bold"))
+green=Label(frame1,text=" ",bg="green",font=("Helvetica 11 bold"),padx=10)
 green.place(x=250,y=180)
-green_mean=Label(frame1,text="--PROBLEM RESOLVED",font=("Helvetica 9 bold"))
-green_mean.place(x=320,y=180)
+green_mean=Label(frame1,text="= PROBLEM RESOLVED",font=("Helvetica 9 bold"),bg="lavender")
+green_mean.place(x=280,y=180)
 
 
 def refresh():
@@ -91,12 +91,12 @@ ref=Button(frame1,text="REFRESH",font=("Helvetica 9 bold"),command=refresh)
 ref.place(x=150,y=220)
 
 #problem status label above its table
-prob_s=Label(frame1,text="PROBLEM STATUS",font=("Helvetica 15 bold"),fg="green")
-prob_s.place(x=50,y=330)
+prob_s=Label(frame1,text="PROBLEM STATUS",font=("Helvetica 15 bold"),fg="green",bg="lavender")
+prob_s.place(x=180,y=330)
 
 #registered user label above its table
-reg_us=Label(frame1,text="REGISTERED USERS",font=("Helvetica 15 bold"),fg="green")
-reg_us.place(x=640,y=330)
+reg_us=Label(frame1,text="REGISTERED USERS",font=("Helvetica 15 bold"),fg="green",bg="lavender")
+reg_us.place(x=780,y=330)
 
 #CONNECTING TO DATABASE AND CHANGING THE PROBLEM'S STATUS
 def change():
@@ -312,7 +312,7 @@ def tbl3():
             elif j==5:
                 wid=30
             elif j==6:
-                wid=8
+                wid=10
             elif j==7:
                 wid=10
             elif j==8:

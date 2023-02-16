@@ -7,6 +7,7 @@ from tkinter import messagebox
 root=Tk()
 root.geometry("1920x1108")
 root.config(bg="skyblue")
+root.resizable(False,False)
 
 
 def over_v():
@@ -30,11 +31,11 @@ bottomcan=Canvas(root,height=50,width=1800,bg="black")
 bottomcan.place(x=0,y=750)
 
  #project logo
-proj_logo=ImageTk.PhotoImage(Image.open("main_logo.png"))
+proj_logo=ImageTk.PhotoImage(Image.open("images\\main_logo.png"))
 logo_label=Label(root,image=proj_logo,bd=0,bg="black",height=70)
 logo_label.place(x=640,y=5)
 
-proj_logo2=ImageTk.PhotoImage(Image.open("second.png"))
+proj_logo2=ImageTk.PhotoImage(Image.open("images\\second.png"))
 logo_label2=Label(root,image=proj_logo2,bd=0,bg="black",height=60,width=150)
 logo_label2.place(x=0,y=10)
 
@@ -79,6 +80,7 @@ status.bind('<Leave>', on_leave)
 
 #account button
 def acc():
+    root.destroy()
     import account_view
 
 account=Button(root,text="ACCOUNT",font=("Helvetica 15 bold"),command=acc,bd=0,fg="blue",bg="black",activebackground="black")

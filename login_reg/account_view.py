@@ -4,55 +4,67 @@ from tkinter import messagebox
 from PIL import Image,ImageTk
 
 
-
-
 #create a window
-acc=Tk()
-acc.geometry("1280x720")
-acc.title("Accounts")
-acc.config(bg="lavender")
+root=Tk()
+root.geometry("1280x720")
+root.title("rootounts")
+root.config(bg="lavender")
 
-topcan=Canvas(acc,height=80,width=1800,bg="skyblue2")
+#canvas on top of window
+
+topcan=Canvas(root,height=80,width=1800,bg="skyblue2")
 topcan.place(x=0,y=0)
 
 
-# logo=PhotoImage(file="logo-black(7).png")
-# logo1=Label(topcan,image=logo,bd=0,bg="lavender")
-# logo1.place(x=500,y=55)
 
+#title placed on top of  top canvas
 
-
-# logo_2=ImageTk.PhotoImage(Image.open("logo-(8).png"))
-# logo2=Label(acc,image=logo_2,bd=0,bg="skyblue2",height=90)
-# logo2.place(x=0,y=-8)
-
-title1=Label(acc,text="MUNICIPAL",bg="skyblue2",fg="lavender",font=("Helvetica 20 bold"))
+title1=Label(root,text="MUNICIPAL",bg="skyblue2",fg="lavender",font=("Helvetica 20 bold"))
 title1.place(x=160,y=18)
 
-title2=Label(acc,text="PROBLEM",bg="skyblue2",fg="lavender",font=("Helvetica 20 bold"))
+title2=Label(root,text="PROBLEM",bg="skyblue2",fg="lavender",font=("Helvetica 20 bold"))
 title2.place(x=330,y=18)
 
-title3=Label(acc,text="RESOLVER",bg="skyblue2",fg="lavender",font=("Helvetica 20 bold"))
+title3=Label(root,text="RESOLVER",bg="skyblue2",fg="lavender",font=("Helvetica 20 bold"))
 title3.place(x=487,y=18)
 
 
-#your account label
-your_acc=Label(acc,text="YOUR ACCOUNT",font=('Arial',20,'bold'),bg="lavender")
+#your rootount label
+your_acc=Label(root,text="YOUR ACCOUNT",font=('Arial',20,'bold'),bg="lavender")
 your_acc.place(x=620,y=110)
 
-#Frame for account details
-frame=LabelFrame(acc, height=450, width=450, bg='skyblue')
+#Frame for rootount details
+frame=LabelFrame(root, height=450, width=450, bg='skyblue')
 frame.place(x=500, y=150)
 
 #label for account details
-un=Label(frame,text="User Name:",font=('Arial',10,'bold'),bg='white')
+un=Label(frame,text="User Name:",font=('Arial',10,'bold'),bg='skyblue')
 un.place(x=20,y=20)
-em=Label(frame,text="Email:",font=('Arial',10,'bold'),bg='white').place(x=240,y=20)
-pwd=Label(frame,text="Password:",font=('Arial',10,'bold'),bg='white').place(x=20,y=90)
-phn=Label(frame,text="Phone number:",font=('Arial',10,'bold'),bg='white').place(x=20,y=160)
-add=Label(frame,text="Address:",font=('Arial',10,'bold'),bg='white').place(x=20,y=230)
-ward=Label(frame,text="Ward:",font=('Arial',10,'bold'),bg='white').place(x=20,y=300)
-gender=Label(frame,text="Gender",font=('Arial',10,'bold'),bg="white").place(x=20,y=370)
+em=Label(frame,text="Email:",font=('Arial',10,'bold'),bg='skyblue').place(x=240,y=20)
+pwd=Label(frame,text="Password:",font=('Arial',10,'bold'),bg='skyblue').place(x=20,y=90)
+phn=Label(frame,text="Phone number:",font=('Arial',10,'bold'),bg='skyblue').place(x=20,y=160)
+add=Label(frame,text="Address:",font=('Arial',10,'bold'),bg='skyblue').place(x=20,y=230)
+ward=Label(frame,text="Ward:",font=('Arial',10,'bold'),bg='skyblue').place(x=20,y=300)
+gender=Label(frame,text="Gender",font=('Arial',10,'bold'),bg="skyblue").place(x=20,y=370)
+
+#buttons
+def over():
+    root.destroy()
+    import overview
+overview=Button(root,text="OVERVIEW",font=("Helvetica 15 bold"),bg="skyblue2",command=over,fg="lavender",bd=0)
+overview.place(x=740,y=30)
+
+def repr():
+    root.destroy()
+    import report
+report=Button(root,text="REPORT",font=("Helvetica 15 bold"),bg="skyblue2",fg="lavender",command=repr,bd=0)
+report.place(x=950,y=30)
+
+def stat():
+    root.destroy()
+    import status
+status=Button(root,text="STATUS",font=("Helvetica 15 bold"),bg="skyblue2",fg="lavender",command=stat,bd=0)
+status.place(x=1160,y=30)
 
 
 #fetch user data
@@ -124,7 +136,7 @@ gender_entry.insert(0,g)
 #         conf_passwd.config(show='*')
 
 
-#Entries for Account
+#Entries for rootount
 
 
 # ward.insert()
@@ -139,6 +151,7 @@ gender_entry.insert(0,g)
 
 #logout function
 def logout():
+    global msb
     msb=messagebox.askquestion("Logout","Are you sure you want to logout?")
     if msb=='yes':
         conn=sqlite3.connect('registration.db')
@@ -152,20 +165,21 @@ def logout():
             })
         conn.commit()
         conn.close()
-        if msb=='yes':
-            acc.destroy()
-            import login
-        elif msb=='No':
-            import account_view
+       
+        
+        import login
+    
+    else:
+        pass
 
     
         
   
       
 
-logout_btn=Button(acc,text="LOGOUT",font=('Arial',10,'bold'),fg='white',bg="black",width=12,height=2,cursor='hand2',command=logout).place(x=860, y=640) 
+logout_btn=Button(root,text="LOGOUT",font=('Arial',10,'bold'),fg='white',bg="black",width=12,height=2,cursor='hand2',command=logout).place(x=840, y=640) 
 
-#verification for update
+
  
 
 #update function
@@ -197,11 +211,11 @@ def update():
      conn.commit()
      conn.close()
 
-updte_btn=Button(acc,text="UPDATE",font=('Arial',10,'bold'),fg='white',bg="black",width=12,height=2,cursor='hand2',command=update).place(x=700, y=640) 
+updte_btn=Button(root,text="UPDATE",font=('Arial',10,'bold'),fg='white',bg="black",width=12,height=2,cursor='hand2',command=update).place(x=500, y=640) 
 #delete function
 
 
 #update, delete and logout function
 
 
-acc.mainloop()
+root.mainloop()

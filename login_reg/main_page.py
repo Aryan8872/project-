@@ -4,12 +4,8 @@ from tkinter import messagebox
 import sqlite3
 from tkinter import messagebox
 from tkcalendar import DateEntry
-from tkinter import font
+
  
-
-
-
-
 root=Tk()
 root.geometry("1920x1108")
 root.config(bg="lavender")
@@ -46,11 +42,11 @@ title3=Label(root,text="RESOLVER",bg="black",fg="lavender",font=("Helvetica 20 b
 title3.place(x=487,y=18)
 
 #project logo
-proj_logo1=ImageTk.PhotoImage(Image.open("main_logo.png"))
+proj_logo1=ImageTk.PhotoImage(Image.open("images\\main_logo.png"))
 logo_label1=Label(root,image=proj_logo1,bd=0,bg="black",height=70)
 logo_label1.place(x=640,y=5)
 
-proj_logo2=ImageTk.PhotoImage(Image.open("second.png"))
+proj_logo2=ImageTk.PhotoImage(Image.open("images\\second.png"))
 logo_label2=Label(root,image=proj_logo2,bd=0,bg="black",height=60,width=150)
 logo_label2.place(x=0,y=10)
 
@@ -78,26 +74,4 @@ contact_btn=Button(root,text="Contact us",bg="Lavender",activebackground="lavend
 contact_btn.place(x=150,y=600,width=190,height=47)
 
 
-
-def acc():
-    import account_view
-
-account=Button(root,text="ACCOUNT",font=("Helvetica 15 bold"),command=acc,bd=0,fg="blue",bg="black",activebackground="black")
-account.place(x=1390,y=30)
-
-# textbox=Text(root,width=20,height=20)
-# textbox.pack()
-# def submit(): 
-
-#     textfile=open("data.txt",'a')
-#     saved=textfile.write(textbox.get(1.0,END))
-#     textbox.insert(END,saved)
-#     global myimage
-#     myimage=filedialog.askopenfilename(initialdir="/",filetypes=(("images","*.jpg"),))
-#     file_path=myimage
-#     imag=PhotoImage(file=file_path)
-#     textbox.image_create(END,image=imag)
-
-# butn=Button(root,text="submit",command=submit)
-# butn.pack()
 root.mainloop()
