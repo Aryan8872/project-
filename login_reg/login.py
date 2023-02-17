@@ -72,23 +72,23 @@ def on_enter2(event2):
 pw_entry.bind('<FocusOut>',on_enter2)
 
 
-#hide and show password
-#function to change closeeye to openeye
-# def hide():
-#     closeeye.config(file='closeeye.png')
-#     pw_entry.config(show='*')
-#     eyeButton.config(command=show)
+# hide and show password
+# function to change closeeye to openeye
+def hide():
+    closeeye.config(file='images\\closeeye.png')
+    pw_entry.config(show='*')
+    eyeButton.config(command=show)
 
-# #function to change openeye to closeeye
-# def show():
-#     closeeye.config(file='openeye.png')
-#     pw_entry.config(show='')
-#     eyeButton.config(command=hide)
+#function to change openeye to closeeye
+def show():
+    closeeye.config(file='images\\openeye.png')
+    pw_entry.config(show='')
+    eyeButton.config(command=hide)
 
 
-# closeeye=PhotoImage(file='closeeye.png')
-# eyeButton=Button(frame,image=closeeye,bd=0,bg='lavender',activebackground='lavender',cursor='hand2',command=show)
-# eyeButton.place(x=610,y=345)
+closeeye=PhotoImage(file='images\\closeeye.png')
+eyeButton=Button(frame,image=closeeye,bd=0,bg='lavender',activebackground='lavender',cursor='hand2',command=show)
+eyeButton.place(x=395,y=295)
 
 
 #===================================================================================================================================
