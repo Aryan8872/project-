@@ -67,14 +67,14 @@ myLable.place(x=70,y=170)
 myLable1 = Label(overview,text="Familiar with MPR?",font=("Colonna MT",30,"bold"),bg="Lavender",fg="deepskyblue2")
 myLable1.place(x=1000,y=170)
 
-myLable2 = Label(overview, text="Tell us how we can make ourselves better for you!",font=("Microsoft Uighur",20),bg="Lavender",fg="deepskyblue2")
+myLable2 = Label(overview, text="Tell us how we can make ourselves \n better for you!",font=("Microsoft Uighur",20),bg="Lavender",fg="deepskyblue2")
 myLable2.place(x=1000,y=280)
 
 feedback_btn=Button(overview,text="Feedback",bg="Lavender",activebackground="lavender",activeforeground="deepskyblue2",fg="deepskyblue2",font=("Microsoft Uighur",15),command=feedbck)
 feedback_btn.place(x=1100,y=550,width=190,height=47)
 
 
-myLable2 = Label(overview, text="MPR is a problem resolver site where we take in any of your municipal problems\nand forward them to respective authorities who will take action on it right away.",font=("Microsoft Uighur",20),bg="Lavender",fg="deepskyblue2")
+myLable2 = Label(overview, text="MPR is a problem resolver site where we take in any of your \n municipal problems and forward them to respective \n authorities who will take action on it right away.",font=("Microsoft Uighur",20),bg="Lavender",fg="deepskyblue2")
 myLable2.place(x=70,y=280)
 report_button=Button(overview,text="Report",bg="Lavender",activebackground="lavender",activeforeground="deepskyblue2",fg="deepskyblue2",font=("Microsoft Uighur",15),command=rep)
 report_button.place(x=150,y=500,width=190,height=47)
