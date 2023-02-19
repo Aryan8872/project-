@@ -192,12 +192,7 @@ def acc():
 account=Button(root,text="ACCOUNT",font=("Helvetica 15 bold"),command=acc,bd=0,fg="blue",bg="black",activebackground="black")
 account.place(x=1390,y=30)
 
-
-
-
-
-
-
+#############################database################################
 
 conn=sqlite3.connect('report.db')
 c=conn.cursor()
