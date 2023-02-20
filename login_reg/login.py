@@ -10,13 +10,6 @@ root.config(bg="skyblue")
 root.maxsize(900,600)
 root.minsize(900,600)
 
-# #logo of login
-# logo_login=ImageTk.PhotoImage(Image.open("logo-white (2).png"))
-# logo=Label(root,image=logo_login)
-# logo.place(x=800,y=-100)
-
-
-
 
 # importing main_page inside a function
 def overview_page():
@@ -27,6 +20,10 @@ def overview_page():
 frame=LabelFrame(root,width=500,height=600,bg="lavender")
 frame.place(x=0,y=0)
 
+#logo of login
+logo_login=ImageTk.PhotoImage(Image.open("images\\logo-(8).png"))
+logo=Label(frame,image=logo_login)
+logo.place(x=0,y=0)
 #login in to your account
 login=Label(frame,text="LOGIN",fg="deepskyblue2",font=("Helvetica 20 bold"),bg="lavender")
 login.place(x=220,y=80)
