@@ -34,10 +34,13 @@ def email_check():
     c=conn.cursor()
     c.execute("SELECT * from register WHERE user_name=?",[(username_entry.get())])
     record=c.fetchall()
-    if not record:
-        messagebox.showinfo('Error!',"Username doesnot exist")
+    if username_entry.get()=='' or newpass_entry.get()=='' or confirmpass_entry.get()=='':
+        messagebox.showerror("Error","empty fields")
+    elif not record:
+        messagebox.showerror('Error!',"Username doesnot exist")
     elif newpass_entry.get() != confirmpass_entry.get():
-        messagebox.showinfo('Error!',"passwords doesnot match")
+        messagebox.showerror('Error!',"passwords doesnot match")
+    
     else:
          conn = sqlite3.connect("registration.db")
          c = conn.cursor()
@@ -48,9 +51,12 @@ def email_check():
             'u':username_entry.get(),
             'passwd':newpass_entry.get()
         })
-         messagebox.showinfo("Congrats!","password changed succesfully")
+         messagebox.showerror("Congrats!","password changed succesfully")
+         root.destroy()
+         import login
     conn.commit()
     conn.close()
+    
 
 
 
