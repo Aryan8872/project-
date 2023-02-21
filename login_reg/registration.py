@@ -1,6 +1,7 @@
 from tkinter import *
 import sqlite3
 from tkinter import messagebox
+from PIL import ImageTk,Image
 
 root=Tk()
 root.title("Municipal Problem Reporting")
@@ -47,11 +48,8 @@ Confirm.place(x=445,y=220)
 ward=Label(frame1,text="Ward Number",font=('Ariel', 17),fg="skyblue",background="lavender")
 ward.place(x=45,y=440)
 
-calls=Label(frame2,text="Contact:",font=('Ariel', 25),fg="white",background="skyblue")
-calls.place(x=10,y=510)
 
-num=Label(frame2,text="9862186238",font=('Ariel', 25),fg="white",bg="skyblue")
-num.place(x=10,y=550)
+
 
 #ENTRY BOXES
 usernam_entry=Entry(frame1,width=35,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="lavender")
@@ -78,9 +76,6 @@ phn_entry.place(x=58,y=275)
 
 
 
-var=IntVar
-c=Checkbutton(frame1,text="Keep Me Logged in",font=('Ariel', 17),variable=var,background="lavender")
-c.place(x=290,y=550)
 
 
 #canvas lines
@@ -119,6 +114,12 @@ mycanvas11.place(x=450,y=310)
 
 mycanvas12=Canvas(frame1,width=300,height=1,background="black")
 mycanvas12.place(x=450,y=420)
+
+
+proj_logo=ImageTk.PhotoImage(Image.open("images\\logo-white (4).png"))
+logo_label=Label(root,image=proj_logo,bd=0,bg="black",height=700, width=400)
+logo_label.place(x=800,y=0)
+
 
 
 #radio button to select gender of user
