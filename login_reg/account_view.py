@@ -3,7 +3,7 @@ import sqlite3
 from tkinter import messagebox
 from PIL import Image,ImageTk
 
-#sfpejj
+
 #create a window
 root=Tk()
 root.geometry("1280x720")
@@ -14,8 +14,6 @@ root.config(bg="lavender")
 
 topcan=Canvas(root,height=80,width=1800,bg="skyblue2")
 topcan.place(x=0,y=0)
-
-
 
 #title placed on top of  top canvas
 
@@ -68,13 +66,15 @@ status.place(x=1160,y=30)
 
 
 #fetch user data
+'''retieves data from regitration database and stores it'''
+
 try:
     conn=sqlite3.connect('registration.db')
     c=conn.cursor()
     c.execute("SELECT * from register WHERE user_status=:act",{'act':True})
     records=c.fetchall()
     a=records[0][0]
-    b=records[0][1]
+    b=records[0][1]                                 
     c=records[0][2]
     d=records[0][3]
     e=records[0][4]
@@ -82,7 +82,9 @@ try:
     g=records[0][6]
     
     conn.commit()
-    conn.close()
+    conn.close() 
+
+#incase data base is empty the following data will be inserted into the entry boxes
 except:
     a="User name"
     b="Password"
@@ -123,33 +125,9 @@ gender_entry.place(x=20,y=400)
 gender_entry.insert(0,g)
 
 
-#show password functions
-# def show():
-#     if (showw.get()==1):
-#         passwd.config(show='')
-#     else:
-#         passwd.config(show='*')
-# def show2():
-#     if (showw2.get()==1):
-#         conf_passwd.config(show='')
-#     else:
-#         conf_passwd.config(show='*')
-
-
-#Entries for rootount
-
-
-# ward.insert()
-# ward.place()
-
-
-# phone_num=Entry(window)
-# phone_num.insert(0,f)
-# phone_num.place(x=700,y=565)
-
-
-
 #logout function
+
+#if yes is  clicked the window closes and login window opens as well as sets user status to offline
 def logout():
     global msb
     msb=messagebox.askquestion("Logout","Are you sure you want to logout?")
@@ -166,23 +144,16 @@ def logout():
         conn.commit()
         conn.close()
        
-        
+        root.destroy()
         import login
-    
+ 
     else:
         pass
-
-    
-        
-  
-      
-
 logout_btn=Button(root,text="LOGOUT",font=('Arial',10,'bold'),fg='white',bg="black",width=12,height=2,cursor='hand2',command=logout).place(x=840, y=640) 
 
-
- 
-
 #update function
+
+#updates uuser data if any changes are made by the user
 def update():
      conn=sqlite3.connect("registration.db")
      c=conn.cursor()
@@ -212,10 +183,6 @@ def update():
      conn.close()
 
 updte_btn=Button(root,text="UPDATE",font=('Arial',10,'bold'),fg='white',bg="black",width=12,height=2,cursor='hand2',command=update).place(x=500, y=640) 
-#delete function
-
-
-#update, delete and logout function
 
 
 root.mainloop()

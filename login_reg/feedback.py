@@ -27,7 +27,7 @@ topcan=Canvas(root,height=80,width=1800,bg="black")
 topcan.place(x=0,y=0)
 
 #bottom canvas
-bottomcan=Canvas(root,height=50,width=1800,bg="black")
+bottomcan=Canvas(root,height=80,width=1800,bg="black")
 bottomcan.place(x=0,y=750)
 
  #project logo
@@ -180,25 +180,34 @@ conn.close()
 
 #inserting feedback data into database
 def submit():
-
-    conn=sqlite3.connect("feedback.db")
-    data=txtbox.get(1.0,END)
+     
+    conn=sqlite3.connect("registration.db")           
     c=conn.cursor()
-    c.execute("INSERT INTO feedback VALUES(:user_name,:feedback,:emoji)",{
-        'user_name':un_entry.get(),
-        'feedback':data,
-        'emoji':emoji    
-    })
+    c.execute("SELECT * from register WHERE user_name=?",[(un_entry.get())])  #selecting data from registration database for verification
+    record=c.fetchall()
+    if record:                            #if username exits feeback can be submitted
+        try:
+            conn=sqlite3.connect("feedback.db")
+            data=txtbox.get(1.0,END)
+            c=conn.cursor()
+            c.execute("INSERT INTO feedback VALUES(:user_name,:feedback,:emoji)",{
+                'user_name':un_entry.get(),
+                'feedback':data,
+                'emoji':emoji    
+            })
 
-    conn.commit()
-    conn.close()
-    messagebox.showinfo('Success',"Thank you for your feedback!")
+            conn.commit()
+            conn.close()
+            messagebox.showinfo('Success',"Thank you for your feedback!")
+        except sqlite3.IntegrityError:                           
+            messagebox.showerror("Error","feedback already exists")
+    else:
+        messagebox.showerror("Error","username doesnot exist")
+        
 
 #send button
 send=Button(root,text="SEND",bg="green",font=("Helvetica 12 bold"),width=15,command=submit)
 send.place(x=850,y=700)
-
-
 
 
 root.mainloop()

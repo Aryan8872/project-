@@ -96,7 +96,7 @@ prob_s.place(x=180,y=330)
 
 #registered user label above its table
 reg_us=Label(frame1,text="REGISTERED USERS",font=("Helvetica 15 bold"),fg="green",bg="lavender")
-reg_us.place(x=780,y=330)
+reg_us.place(x=780,y=125)
 
 #CONNECTING TO DATABASE AND CHANGING THE PROBLEM'S STATUS
 def change():
@@ -194,7 +194,7 @@ tbl()
 #table for registration database
 def tbl2():
     table2=LabelFrame(frame1,height=580,width=650,bg='white')
-    table2.place(x=620,y=360)
+    table2.place(x=620,y=160)
 
     try:
         #try fetching data from database
@@ -263,85 +263,19 @@ def tbl2():
 tbl2()
 
 
-#table for  report database
-def tbl3():
-    table3=LabelFrame(frame1,height=580,width=650,bg='white')
-    table3.place(x=480,y=160)
 
-    try:
-        #try fetching data from database
-        conn=sqlite3.connect('report.db')
-        c=conn.cursor()
-        c.execute("SELECT * from rep")
-        lst3=c.fetchall()
-        conn.commit()
-        conn.close()
-    except:
-        #empty list if list doesn't exist
-        lst3=[]
-    finally:
-        #Table headings
-        lst3.insert(0,('First name','Last name' , 'Ward num' , 'Tole', 'Issue', 'Description', 'Level','Date'))
-        print(lst3)
-    #creating a table
-    total_rows3 =len(lst3)
-    total_columns3=len(lst3[0])
-    for i in range(total_rows3):
-        if i==0:
-            #table heading
-            fontt=('Arial',10,'bold')
-            jus=CENTER
-            bgc ='#9cc2e5'
-        else:
-            #table data
-            fontt=('Arial',10)
-            jus=LEFT
-            bgc='white'
-        for j in range(total_columns3):
-            #width for all columns
-            if j==0:
-                wid=10
-            elif j==1:
-                wid=10
-            elif j==2:
-                wid=5
-            elif j==3:
-                wid=9
-            elif j==4:
-                wid=10
-            elif j==5:
-                wid=30
-            elif j==6:
-                wid=10
-            elif j==7:
-                wid=10
-            elif j==8:
-                wid=10
-            else:
-                wid=5
-            f=Entry(
-                table3,
-                width=wid,
-                font=fontt,
-                justify=jus,
-                disabledforeground='black',
-                disabledbackground=bgc
-            )
-            f.grid(row=i,column=j)
-            f.insert(0,lst3[i][j])
-            f.config(state=DISABLED)
-
-#calling table function
-tbl3()
 
 
 def editstatus():
     sts=Toplevel()
     sts.geometry("200x200")
+    sts.title("status")
+
     label1=Label(sts,text="ENTER THE OID")
-    label1.place(x=0,y=0)
+    label1.place(x=0,y=80)
     entry1=Entry(sts,font=("Helvetica 9 bold"))
     entry1.place(x=0,y=20)
+
     def del_rec():
         conn=sqlite3.connect("status.db")
         c=conn.cursor()
@@ -355,13 +289,91 @@ def editstatus():
 edit_sts=Button(root,text="Edit status table",bg="green",fg="white",font=("Helvetica 9 bold"),command=editstatus)
 edit_sts.place(x=1220,y=530)
 
+
+
 def editreport():
      rept=Toplevel()
-     rept.geometry("200x200")
+     rept.geometry("900x600")
+     rept.config(bg="lavender")
+
+     #table for  report database
+     def tbl3():
+        table3=LabelFrame(rept,height=580,width=650,bg='white')
+        table3.place(x=0,y=70)
+
+        try:
+            #try fetching data from database
+            conn=sqlite3.connect('report.db')
+            c=conn.cursor()
+            c.execute("SELECT oid,first_name,last_name,ward_no,tole,issue,description,level,date from rep")
+            lst3=c.fetchall()
+            conn.commit()
+            conn.close()
+        except:
+            #empty list if list doesn't exist
+            lst3=[]
+        finally:
+            #Table headings
+            lst3.insert(0,( 'ID','First name','Last name' , 'Ward num' , 'Tole', 'Issue', 'Description', 'Level','Date'))
+            print(lst3)
+        #creating a table
+        total_rows3 =len(lst3)
+        total_columns3=len(lst3[0])
+        for i in range(total_rows3):
+            if i==0:
+                #table heading
+                fontt=('Arial',10,'bold')
+                jus=CENTER
+                bgc ='#9cc2e5'
+            else:
+                #table data
+                fontt=('Arial',10)
+                jus=LEFT
+                bgc='white'
+            for j in range(total_columns3):
+                #width for all columns
+                if j==0:
+                    wid=3
+                elif j==1:
+                    wid=10
+                elif j==2:
+                    wid=10
+                elif j==3:
+                    wid=5
+                elif j==4:
+                    wid=10
+                elif j==5:
+                    wid=13
+                elif j==6:
+                    wid=40
+                elif j==7:
+                    wid=15
+                elif j==8:
+                    wid=13
+                
+                else:
+                    wid=5
+                f=Entry(
+                    table3,
+                    width=wid,
+                    font=fontt,
+                    justify=jus,
+                    disabledforeground='black',
+                    disabledbackground=bgc
+                )
+                f.grid(row=i,column=j)
+                f.insert(0,lst3[i][j])
+                f.config(state=DISABLED)
+
+    #calling table function
+     tbl3()
+
+     tablelabel=Label(rept,text="REPORTS",font=("Helvetica 15 bold"),fg="green",bg="lavender").place(x=350,y=40)
      label1=Label(rept,text="ENTER THE OID")
-     label1.place(x=0,y=0)
+     label1.place(x=0,y=390)
      entry1=Entry(rept,font=("Helvetica 9 bold"))
-     entry1.place(x=0,y=20)
+     entry1.place(x=0,y=420)
+
      def del_rep():
         conn=sqlite3.connect("report.db")
         c=conn.cursor()
@@ -370,7 +382,12 @@ def editreport():
         conn.close()
         messagebox.showinfo("sucess","deleted sucessfully!")
      btn1=Button(rept,text="DELETE",font=("Helvetica 9 bold"),bg="red",fg="white",command=del_rep)
-     btn1.place(x=0,y=40)
+     btn1.place(x=0,y=450)
+     def refrept():
+        rept.destroy()
+        editreport()
+     btn2=Button(rept,text="REFRESH",font=("Helvetica 9 bold"),bg="red",fg="white",command=refrept)
+     btn2.place(x=60,y=450)
 
 edit_repo=Button(root,text="Edit report table",bg="green",fg="white",font=("Helvetica 9 bold"),command=editreport)
 edit_repo.place(x=1350,y=530)
