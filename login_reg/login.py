@@ -94,14 +94,15 @@ eyeButton.place(x=395,y=295)
 
 
 def login_action():
-
-    if un_entry.get()=='' or pw_entry.get()=='':
-        messagebox.showinfo("error","one or more fields are empty")
+    if (un_entry.get()=='' or pw_entry.get()==''):
         
-    else:            
+
+        messagebox.showerror("error","one or more fields are empty")
+    
+    else:
+
         conn = sqlite3.connect("registration.db")
         c = conn.cursor()
-
         user = 'SELECT * FROM register WHERE user_name = ? and password = ?'
         c.execute(user, [(un_entry.get()), (pw_entry.get())])
         un=un_entry.get()
@@ -118,9 +119,11 @@ def login_action():
                         })
             conn.commit()
             overview_page()
+        
 
         else:
             messagebox.showerror("Failed", "Wrong Login details, please try again.")
+        
 
 
 

@@ -160,75 +160,70 @@ def add_rec():
     count=0
     global l
     l=1
-    for i in range(l):
-        l+=1
-        count=0
+    count=0
 
-        if  (usernam_entry.get()=='' or pass_entry.get()=='' or phn_entry.get()=='' or entryemail.get()=='' or entryward.get()=='' or addr_ent.get()==''):
-            messagebox.showerror("Error","one or more fields are empty")
-            break 
-        else:
-            count+=1
+    if  (usernam_entry.get()=='' or pass_entry.get()=='' or phn_entry.get()=='' or entryemail.get()=='' or entryward.get()=='' or addr_ent.get()==''):
+        messagebox.showerror("Error","one or more fields are empty")
 
-        if (confpass_entry.get()!=pass_entry.get()):
-            messagebox.showerror("Error","passwords didn't match")
-            break
-        else:
-            count+=1
+        
+ 
+
+    if (confpass_entry.get()!=pass_entry.get()):
+        messagebox.showerror("Error","passwords didn't match")
+        
+    
+   
+        
             
-        if usernam_entry.get()=='':
-            messagebox.showerror("Error","Empty username")
-            break
-        else:
-            count+=1
+    if usernam_entry.get()=='':
+        messagebox.showerror("Error","Empty username")
+        
+    
+    
+       
 
-        if len(pass_entry.get())<=5:
-            messagebox.showerror("Error","Password should be more than 5 characters")
-            break
-        else:
-            count+=1
+    if len(pass_entry.get())<=5:
+        messagebox.showerror("Error","Password should be more than 5 characters")
+        
+    
+    
 
-        if '@' not in entryemail.get()  or  ".com" not in entryemail.get():
-            messagebox.showerror("Error","Invalid email format")
-           
-            break
-            
-        else:
-            count+=1 
+    if '@' not in entryemail.get()  or  ".com" not in entryemail.get():
+        messagebox.showerror("Error","Invalid email format")
+        
+             
+    
 
     #converting default data type of entry box into integer if user inputs integer number
-        try:
-            global phn
-            phn=int(phn_entry.get())       
-        except ValueError:
-            messagebox.showwarning("error!","phone number is not an integer")
+    try:
+        global phn
+        phn=int(phn_entry.get())       
+    except ValueError:
+        messagebox.showwarning("error!","phone number is not an integer")
+        
 
     #getting length of phone number if the phone number is integer
-        try:
-            global num
-            num=len(phn_entry.get())
-        except:
-            pass
+    try:
+        global num
+        num=len(phn_entry.get())
+    except:
+        pass
 
-        if num!=10:
-            messagebox.showerror("Error","Invalid phone number length")
-            break
-        else:
-            count+=1
+    if num!=10:
+        messagebox.showerror("Error","Invalid phone number length")
+        
+    
 
         #converting default data type of entry box into integer so that  we can verify if the input is integer or not
-        try:
-            global wd
-            wd=int(entryward.get())
+    try:
+        global wd
+        wd=int(entryward.get())
             
-        except ValueError:
-            messagebox.showwarning("error!","Please enter integer in ward field")
+    except ValueError:
+        messagebox.showwarning("error!","Please enter integer in ward field")
+        
 
-        else:
-            count+=1
-            print(count)
-
-    if count==7:
+    else:
         try:
             conn=sqlite3.connect('registration.db')
             c=conn.cursor()
@@ -252,6 +247,8 @@ def add_rec():
                 #returns error if the user doesnot input gender
         except NameError: 
                     messagebox.showerror("Error","Enter your gender")
+        except sqlite3.IntegrityError:
+            messagebox.showerror("Error","username already exists")
 
  
 

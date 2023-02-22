@@ -46,7 +46,7 @@ logo_label2.place(x=0,y=10)
 
 
 #Entering problem solved username
-Labe1=Label(frame1,text="# ENTER PROBLEM RESOLVED USER'S USERNAME",font=("Helvetica 15 bold"),bg="lavender")
+Labe1=Label(frame1,text="# CHANGE STATUS",font=("Helvetica 15 bold"),bg="lavender")
 Labe1.place(x=60,y=40)
 
 #username label
@@ -100,18 +100,28 @@ reg_us.place(x=780,y=125)
 
 #CONNECTING TO DATABASE AND CHANGING THE PROBLEM'S STATUS
 def change():
-    conn=sqlite3.connect("status.db")
+    col=pg_entry.get()
+    conn=sqlite3.connect("registration.db")           
     c=conn.cursor()
-    c.execute("""UPDATE status SET
-            problem_status= :sts
-            WHERE user_name= :un""",
-            {
-                'un':un_entry.get(),
-                'sts':pg_entry.get()
-            })
-    conn.commit()
-    conn.close()
-    messagebox.showinfo("success","Submitted sucessfully!")
+    c.execute("SELECT * from register WHERE user_name=?",[(un_entry.get())])  #selecting  data from registration database for verification
+    record=c.fetchall()
+    if record and 'red' in col or 'green' in col or 'blue' in col :
+        conn=sqlite3.connect("status.db")
+        c=conn.cursor()
+        c.execute("""UPDATE status SET
+                problem_status= :sts
+                WHERE user_name= :un""",
+                {
+                    'un':un_entry.get(),
+                    'sts':pg_entry.get()
+                })
+        conn.commit()
+        conn.close()
+        messagebox.showinfo("success","changed sucessfully!")
+    elif not record:
+        messagebox.showerror("error!","username doesnot exist")
+    elif not('red' in col or 'green' in col or 'blue' in col):
+        messagebox.showerror("error!","enter valid color")
 
 #change button
 change_btn=Button(frame1,text="Change",font=("Helvetica 9 bold"),command=change)
