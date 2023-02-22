@@ -155,32 +155,93 @@ logout_btn=Button(root,text="LOGOUT",font=('Arial',10,'bold'),fg='white',bg="bla
 
 #updates uuser data if any changes are made by the user
 def update():
-     conn=sqlite3.connect("registration.db")
-     c=conn.cursor()
-     c.execute("""UPDATE register SET 
-         user_name= :un,
-         password= :pass,
-         phone_num= :phn,
-         email= :em,
-         address= :addr,
-         ward= :ward,
-         gender=:gen
-         WHERE  user_status= :state""",
-         {
-         'un':un_entry.get(),   
-         'pass':pwd_entry.get(),
-         'phn':phn_entry.get(),
-         'em':em_entry.get(),
-         'addr':add_entry.get(),
-         'ward':ward_entry.get(),
-         'gen':gender_entry.get(),
-         'state':True
-         })
- 
-#     #messagebox after update
-     messagebox.showinfo("Accounts","Updated fields successfully!")
-     conn.commit()
-     conn.close()
+    count=0
+    while count<=6:
+
+        if  (un_entry.get()=='' or pwd_entry.get()=='' or phn_entry.get()=='' or em_entry.get()=='' or ward_entry.get()=='' or add_entry.get()==''):
+                messagebox.showerror("Error","one or more fields are empty")
+                break
+        else:
+            count+=1
+            print(count)
+
+        if len(pwd_entry.get())<=5:
+            messagebox.showerror("Error","Password should be more than 5 characters")
+            break
+        else:
+            count+=1
+            print(count)
+                
+        if '@' not in em_entry.get()  or  ".com" not in em_entry.get():
+            messagebox.showerror("Error","Invalid email format")
+            break
+        else:
+            count+=1
+            print(count)
+                
+            #converting default data type of entry box into integer if user inputs integer number
+        try:
+            global phn
+            phn=int(phn_entry.get())
+            count+=1 
+            print(count)      
+        except ValueError:
+            messagebox.showwarning("error!","phone number is not an integer")
+            break
+                
+
+            #getting length of phone number if the phone number is integer
+        try:
+            global num
+            num=len(phn_entry.get())
+        except:
+            pass
+
+        if num!=10:
+            messagebox.showerror("Error","Invalid phone number length")
+            break
+        else:
+            count+=1
+            print(count)
+                
+            #converting default data type of entry box into integer so that  we can verify if the input is integer or not
+        try:
+            global wd
+            wd=int(ward_entry.get())
+            count+=1
+            print(count)   
+        except ValueError:
+            messagebox.showwarning("error!","Please enter integer in ward field")
+            break
+        
+        print(count)
+    if count==12:
+        conn=sqlite3.connect("registration.db")
+        c=conn.cursor()
+        c.execute("""UPDATE register SET 
+            user_name= :un,
+            password= :pass,
+            phone_num= :phn,
+            email= :em,
+            address= :addr,
+            ward= :ward,
+            gender=:gen
+            WHERE  user_status= :state""",
+            {
+            'un':un_entry.get(),   
+            'pass':pwd_entry.get(),
+            'phn':phn_entry.get(),
+            'em':em_entry.get(),
+            'addr':add_entry.get(),
+            'ward':ward_entry.get(),
+            'gen':gender_entry.get(),
+            'state':True
+            })
+    
+    #     #messagebox after update
+        messagebox.showinfo("Accounts","Updated fields successfully!")
+        conn.commit()
+        conn.close()
 
 updte_btn=Button(root,text="UPDATE",font=('Arial',10,'bold'),fg='white',bg="black",width=12,height=2,cursor='hand2',command=update).place(x=500, y=640) 
 
