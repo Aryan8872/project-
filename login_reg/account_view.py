@@ -15,8 +15,6 @@ root.config(bg="lavender")
 topcan=Canvas(root,height=80,width=1800,bg="skyblue2")
 topcan.place(x=0,y=0)
 
-
-
 #title placed on top of  top canvas
 
 title1=Label(root,text="MUNICIPAL",bg="skyblue2",fg="lavender",font=("Helvetica 20 bold"))
@@ -68,13 +66,15 @@ status.place(x=1160,y=30)
 
 
 #fetch user data
+'''retieves data from regitration database and stores it'''
+
 try:
     conn=sqlite3.connect('registration.db')
     c=conn.cursor()
     c.execute("SELECT * from register WHERE user_status=:act",{'act':True})
     records=c.fetchall()
     a=records[0][0]
-    b=records[0][1]
+    b=records[0][1]                                 
     c=records[0][2]
     d=records[0][3]
     e=records[0][4]
@@ -82,7 +82,9 @@ try:
     g=records[0][6]
     
     conn.commit()
-    conn.close()
+    conn.close() 
+
+#incase data base is empty the following data will be inserted into the entry boxes
 except:
     a="User name"
     b="Password"
@@ -123,33 +125,9 @@ gender_entry.place(x=20,y=400)
 gender_entry.insert(0,g)
 
 
-#show password functions
-# def show():
-#     if (showw.get()==1):
-#         passwd.config(show='')
-#     else:
-#         passwd.config(show='*')
-# def show2():
-#     if (showw2.get()==1):
-#         conf_passwd.config(show='')
-#     else:
-#         conf_passwd.config(show='*')
-
-
-#Entries for rootount
-
-
-# ward.insert()
-# ward.place()
-
-
-# phone_num=Entry(window)
-# phone_num.insert(0,f)
-# phone_num.place(x=700,y=565)
-
-
-
 #logout function
+
+#if yes is  clicked the window closes and login window opens as well as sets user status to offline
 def logout():
     global msb
     msb=messagebox.askquestion("Logout","Are you sure you want to logout?")
@@ -166,56 +144,106 @@ def logout():
         conn.commit()
         conn.close()
        
-        
+        root.destroy()
         import login
-    
+ 
     else:
         pass
-
-    
-        
-  
-      
-
 logout_btn=Button(root,text="LOGOUT",font=('Arial',10,'bold'),fg='white',bg="black",width=12,height=2,cursor='hand2',command=logout).place(x=840, y=640) 
 
-
- 
-
 #update function
+
+#updates uuser data if any changes are made by the user
 def update():
-     conn=sqlite3.connect("registration.db")
-     c=conn.cursor()
-     c.execute("""UPDATE register SET 
-         user_name= :un,
-         password= :pass,
-         phone_num= :phn,
-         email= :em,
-         address= :addr,
-         ward= :ward,
-         gender=:gen
-         WHERE  user_status= :state""",
-         {
-         'un':un_entry.get(),   
-         'pass':pwd_entry.get(),
-         'phn':phn_entry.get(),
-         'em':em_entry.get(),
-         'addr':add_entry.get(),
-         'ward':ward_entry.get(),
-         'gen':gender_entry.get(),
-         'state':True
-         })
- 
-#     #messagebox after update
-     messagebox.showinfo("Accounts","Updated fields successfully!")
-     conn.commit()
-     conn.close()
+    count=0
+    while count<=6:
+
+        if  (un_entry.get()=='' or pwd_entry.get()=='' or phn_entry.get()=='' or em_entry.get()=='' or ward_entry.get()=='' or add_entry.get()==''):
+                messagebox.showerror("Error","one or more fields are empty")
+                break
+        else:
+            count+=1
+            print(count)
+
+        if len(pwd_entry.get())<=5:
+            messagebox.showerror("Error","Password should be more than 5 characters")
+            break
+        else:
+            count+=1
+            print(count)
+                
+        if '@' not in em_entry.get()  or  ".com" not in em_entry.get():
+            messagebox.showerror("Error","Invalid email format")
+            break
+        else:
+            count+=1
+            print(count)
+                
+            #converting default data type of entry box into integer if user inputs integer number
+        try:
+            global phn
+            phn=int(phn_entry.get())
+            count+=1 
+            print(count)      
+        except ValueError:
+            messagebox.showwarning("error!","phone number is not an integer")
+            break
+                
+
+            #getting length of phone number if the phone number is integer
+        try:
+            global num
+            num=len(phn_entry.get())
+        except:
+            pass
+
+        if num!=10:
+            messagebox.showerror("Error","Invalid phone number length")
+            break
+        else:
+            count+=1
+            print(count)
+                
+            #converting default data type of entry box into integer so that  we can verify if the input is integer or not
+        try:
+            global wd
+            wd=int(ward_entry.get())
+            count+=1
+            print(count)   
+        except ValueError:
+            messagebox.showwarning("error!","Please enter integer in ward field")
+            break
+        
+        print(count)
+    if count==12:
+        conn=sqlite3.connect("registration.db")
+        c=conn.cursor()
+        c.execute("""UPDATE register SET 
+            user_name= :un,
+            password= :pass,
+            phone_num= :phn,
+            email= :em,
+            address= :addr,
+            ward= :ward,
+            gender=:gen
+            WHERE  user_status= :state""",
+            {
+            'un':un_entry.get(),   
+            'pass':pwd_entry.get(),
+            'phn':phn_entry.get(),
+            'em':em_entry.get(),
+            'addr':add_entry.get(),
+            'ward':ward_entry.get(),
+            'gen':gender_entry.get(),
+            'state':True
+            })
+    
+    #     #messagebox after update
+        messagebox.showinfo("Accounts","Updated fields successfully!")
+        conn.commit()
+        conn.close()
 
 updte_btn=Button(root,text="UPDATE",font=('Arial',10,'bold'),fg='white',bg="black",width=12,height=2,cursor='hand2',command=update).place(x=500, y=640) 
-#delete function
-
-
-#update, delete and logout function
 
 
 root.mainloop()

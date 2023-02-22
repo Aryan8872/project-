@@ -10,13 +10,6 @@ root.config(bg="skyblue")
 root.maxsize(900,600)
 root.minsize(900,600)
 
-# #logo of login
-# logo_login=ImageTk.PhotoImage(Image.open("logo-white (2).png"))
-# logo=Label(root,image=logo_login)
-# logo.place(x=800,y=-100)
-
-
-
 
 # importing main_page inside a function
 def overview_page():
@@ -27,6 +20,10 @@ def overview_page():
 frame=LabelFrame(root,width=500,height=600,bg="lavender")
 frame.place(x=0,y=0)
 
+#logo of login
+logo_login=ImageTk.PhotoImage(Image.open("images\\logo-(8).png"))
+logo=Label(frame,image=logo_login)
+logo.place(x=0,y=0)
 #login in to your account
 login=Label(frame,text="LOGIN",fg="deepskyblue2",font=("Helvetica 20 bold"),bg="lavender")
 login.place(x=220,y=80)
@@ -72,23 +69,23 @@ def on_enter2(event2):
 pw_entry.bind('<FocusOut>',on_enter2)
 
 
-#hide and show password
-#function to change closeeye to openeye
-# def hide():
-#     closeeye.config(file='closeeye.png')
-#     pw_entry.config(show='*')
-#     eyeButton.config(command=show)
+# hide and show password
+# function to change closeeye to openeye
+def hide():
+    closeeye.config(file='images\\closeeye.png')
+    pw_entry.config(show='*')
+    eyeButton.config(command=show)
 
-# #function to change openeye to closeeye
-# def show():
-#     closeeye.config(file='openeye.png')
-#     pw_entry.config(show='')
-#     eyeButton.config(command=hide)
+#function to change openeye to closeeye
+def show():
+    closeeye.config(file='images\\openeye.png')
+    pw_entry.config(show='')
+    eyeButton.config(command=hide)
 
 
-# closeeye=PhotoImage(file='closeeye.png')
-# eyeButton=Button(frame,image=closeeye,bd=0,bg='lavender',activebackground='lavender',cursor='hand2',command=show)
-# eyeButton.place(x=610,y=345)
+closeeye=PhotoImage(file='images\\closeeye.png')
+eyeButton=Button(frame,image=closeeye,bd=0,bg='lavender',activebackground='lavender',cursor='hand2',command=show)
+eyeButton.place(x=395,y=295)
 
 
 #===================================================================================================================================
@@ -97,14 +94,15 @@ pw_entry.bind('<FocusOut>',on_enter2)
 
 
 def login_action():
-
-    if un_entry.get()=='' or pw_entry.get()=='':
-        messagebox.showinfo("error","one or more fields are empty")
+    if (un_entry.get()=='' or pw_entry.get()==''):
         
-    else:            
+
+        messagebox.showerror("error","one or more fields are empty")
+    
+    else:
+
         conn = sqlite3.connect("registration.db")
         c = conn.cursor()
-
         user = 'SELECT * FROM register WHERE user_name = ? and password = ?'
         c.execute(user, [(un_entry.get()), (pw_entry.get())])
         un=un_entry.get()
@@ -121,9 +119,11 @@ def login_action():
                         })
             conn.commit()
             overview_page()
+        
 
         else:
             messagebox.showerror("Failed", "Wrong Login details, please try again.")
+        
 
 
 

@@ -1,6 +1,7 @@
 from tkinter import *
 import sqlite3
 from tkinter import messagebox
+from PIL import ImageTk,Image
 
 root=Tk()
 root.title("Municipal Problem Reporting")
@@ -47,11 +48,8 @@ Confirm.place(x=445,y=220)
 ward=Label(frame1,text="Ward Number",font=('Ariel', 17),fg="skyblue",background="lavender")
 ward.place(x=45,y=440)
 
-calls=Label(frame2,text="Contact:",font=('Ariel', 25),fg="white",background="skyblue")
-calls.place(x=10,y=510)
 
-num=Label(frame2,text="9862186238",font=('Ariel', 25),fg="white",bg="skyblue")
-num.place(x=10,y=550)
+
 
 #ENTRY BOXES
 usernam_entry=Entry(frame1,width=35,highlightthickness = 0, borderwidth=0,font=('Ariel', 15),background="lavender")
@@ -78,9 +76,6 @@ phn_entry.place(x=58,y=275)
 
 
 
-var=IntVar
-c=Checkbutton(frame1,text="Keep Me Logged in",font=('Ariel', 17),variable=var,background="lavender")
-c.place(x=290,y=550)
 
 
 #canvas lines
@@ -121,6 +116,12 @@ mycanvas12=Canvas(frame1,width=300,height=1,background="black")
 mycanvas12.place(x=450,y=420)
 
 
+proj_logo=ImageTk.PhotoImage(Image.open("images\\logo-white (4).png"))
+logo_label=Label(root,image=proj_logo,bd=0,bg="black",height=700, width=400)
+logo_label.place(x=800,y=0)
+
+
+
 #radio button to select gender of user
 gender=Label(frame1,text="GENDER",font=('Ariel', 17),fg="skyblue",background="lavender")
 gender.place(x=445,y=440)
@@ -155,65 +156,104 @@ c.execute(""" CREATE TABLE IF NOT EXISTS register(
     )""")
 
 def add_rec():
-    #converting default data type of entry box into integer if user inputs integer number
-    try:
-        global phn
-        phn=int(phn_entry.get())       
-    except ValueError:
-        messagebox.showwarning("error!","phone number is not an integer")
+    global count
+    count=0
+    while count<=7:
 
-    #getting length of phone number if the phone number is integer
-    try:
-        global num
-        num=len(phn_entry.get())
-    except:
-        pass
 
-    if  (usernam_entry.get()=='' or pass_entry.get()=='' or phn_entry.get()=='' or entryemail.get()=='' or entryward.get()==''):
-         messagebox.showerror("Error","one or more fields are empty")
-    elif usernam_entry.get()=='':
-        messagebox.showerror("Error","Empty username")
-    elif len(pass_entry.get())<=5:
-         messagebox.showerror("Error","Password should be more than 5 characters")
-    elif '@' not in entryemail.get()  or  ".com" not in entryemail.get():
-         messagebox.showerror("Error","Invalid email format")
-    elif num!=10:
-         messagebox.showerror("Error","Invalid phone number length")
-  
-    
+        if  (usernam_entry.get()=='' or pass_entry.get()=='' or phn_entry.get()=='' or entryemail.get()=='' or entryward.get()=='' or addr_ent.get()==''):
+            messagebox.showerror("Error","one or more fields are empty")
+            break
+        else:
+            count+=1
+            print(count)
 
-    #converting default data type of entry box into integer so that  we can verify if the input is integer or not
-    try:
-        global wd
-        wd=int(entryward.get())       
-    except ValueError:
-        messagebox.showwarning("error!","Please enter integer in ward field")
+        if (confpass_entry.get()!=pass_entry.get()):
+            messagebox.showerror("Error","passwords didn't match")
+            break
+        else:
+            count+=1
+            print(count)
 
-    else:
+
+        if len(pass_entry.get())<=5:
+            messagebox.showerror("Error","Password should be more than 5 characters")
+            break
+        else:
+            count+=1
+            print(count)
+            
+        if '@' not in entryemail.get()  or  ".com" not in entryemail.get():
+            messagebox.showerror("Error","Invalid email format")
+            break
+        else:
+            count+=1
+            print(count)
+            
+        #converting default data type of entry box into integer if user inputs integer number
+        try:
+            global phn
+            phn=int(phn_entry.get())
+            count+=1 
+            print(count)      
+        except ValueError:
+            messagebox.showwarning("error!","phone number is not an integer")
+            break
+            
+
+        #getting length of phone number if the phone number is integer
+        try:
+            global num
+            num=len(phn_entry.get())
+        except:
+            pass
+
+        if num!=10:
+            messagebox.showerror("Error","Invalid phone number length")
+            break
+        else:
+            count+=1
+            print(count)
+            
+        #converting default data type of entry box into integer so that  we can verify if the input is integer or not
+        try:
+            global wd
+            wd=int(entryward.get())
+            count+=1
+            print(count)   
+        except ValueError:
+            messagebox.showwarning("error!","Please enter integer in ward field")
+            break
+        
+    print(count)
+    if count==14:
         try:
             conn=sqlite3.connect('registration.db')
             c=conn.cursor()
             c.execute("INSERT INTO register VALUES( :username, :password, :phone_num, :email, :add, :ward,  :gender, :user_status )",{
 
-                    'username':usernam_entry.get(),
-                    'password':pass_entry.get(),
-                    'phone_num':phn_entry.get(),
-                    'email':entryemail.get(),
-                    'add':addr_ent.get(),
-                    'ward':entryward.get(),
-                    'gender':gend,
-                    'user_status':False
-                
-                    })
+                            'username':usernam_entry.get(),
+                            'password':pass_entry.get(),
+                            'phone_num':phn_entry.get(),
+                            'email':entryemail.get(),
+                            'add':addr_ent.get(),
+                            'ward':entryward.get(),
+                            'gender':gend,
+                            'user_status':False
+                        
+                            })
             conn.commit()
             conn.close()
             messagebox.showinfo("Success",'account created Successfully!')
             open_login()
-        
-        #returns error if the user doesnot input gender
+                
+                #returns error if the user doesnot input gender
         except NameError: 
-            messagebox.showerror("Error","Enter your gender")
+                    messagebox.showerror("Error","Enter your gender")
+        except sqlite3.IntegrityError:
+            messagebox.showerror("Error","username already exists")
 
+ 
 
 #REGISTER BUTTON
 loginbotton=Button(frame1,text="Create Account",font=('Ariel', 20),padx=250,pady=4.5,borderwidth=0,bg="skyblue",fg="white",command=add_rec)

@@ -208,22 +208,42 @@ c.execute(""" CREATE TABLE IF NOT EXISTS rep(
 
     )""")
 def submit():
-    conn=sqlite3.connect('report.db')
-    c=conn.cursor()
-    c.execute("INSERT INTO rep VALUES( :first_name,:last_name,:ward_no,:tole,:issue,:description,:level,:date )",{
+    count=0
+    while count<=4:
+        if (fn_entry.get()=='' or ln_entry.get()=='' or ward_entry.get()=='' or tole_entry.get()=='' or click.get()=='' or box.get(1.0,END)==''):
+            messagebox.showerror("Error","one or more fields are empty")
+            break     
+        else:
+            count+=1
+            print(count)    
+        try:
+            global num 
+            num=int(ward_entry.get())
+            count+=1
+            print(count)    
+        except ValueError:
+            messagebox.showwarning("error!","ward number should be an integer")
+            break
+    if count==6:
+        try:
+            conn=sqlite3.connect('report.db')
+            c=conn.cursor()
+            c.execute("INSERT INTO rep VALUES( :first_name,:last_name,:ward_no,:tole,:issue,:description,:level,:date )",{
 
-          'first_name':fn_entry.get(),
-          'last_name':ln_entry.get(),
-          'ward_no':ward_entry.get(),
-          'tole':tole_entry.get(),
-          'issue':click.get(),
-          'description':box.get(1.0,END),
-          'level':sev.get(),
-          'date':cal.get_date()
-        })
-    conn.commit()
-    conn.close()
-    messagebox.showinfo("Success",'ReportedSuccessfully!')
+            'first_name':fn_entry.get(),
+            'last_name':ln_entry.get(),
+            'ward_no':ward_entry.get(),
+            'tole':tole_entry.get(),
+            'issue':click.get(),
+            'description':box.get(1.0,END),
+            'level':sevr,
+            'date':cal.get_date()
+            })
+            conn.commit()
+            conn.close()
+            messagebox.showinfo("Success",'ReportedSuccessfully!')
+        except NameError: 
+            messagebox.showerror("Error","Mention the severity level")
 
 
 submitbtn=Button(root,text="Report",font=("Helvetica 15 bold"),fg="lavender",bg="deepskyblue2",activeforeground="lavender",activebackground="deepskyblue2",width=25,command=submit)

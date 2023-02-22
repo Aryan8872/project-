@@ -9,7 +9,6 @@ overview.geometry("1920x1108")
 overview.config(bg="lavender")
 
 
-
 def rep():
     overview.destroy()
     import report
