@@ -70,8 +70,21 @@ myLable2.place(x=70,y=280)
 getstart_btn=Button(root,text="Get Started",bg="Lavender",activebackground="lavender",activeforeground="deepskyblue2",fg="deepskyblue2",font=("Microsoft Uighur",15),command=registration)
 getstart_btn.place(x=150,y=500,width=190,height=47)
 
-contact_btn=Button(root,text="Contact us",bg="Lavender",activebackground="lavender",activeforeground="deepskyblue2",fg="deepskyblue2",font=("Microsoft Uighur",15))
-contact_btn.place(x=150,y=600,width=190,height=47)
+'''this function opens a new window showing contact details'''
+def contact():
+    con=Toplevel()
+    con.config(bg="lavender")
+    phn=Label(con,text="Phone:")
+    phn.place(x=0,y=0)
+    phn_num=Label(con,text="9815016727")
+    phn_num.place(x=40,y=0)
+    tel=Label(con,text="Telephone:")
+    tel.place(x=0,y=25)
+    tel_num=Label(con,text="023-542987")
+    tel_num.place(x=60,y=25)
 
+contact_btn=Button(root,text="Contact us",bg="Lavender",activebackground="lavender",activeforeground="deepskyblue2",fg="deepskyblue2",
+font=("Microsoft Uighur",15),command=contact)
+contact_btn.place(x=150,y=600,width=190,height=47)
 
 root.mainloop()
