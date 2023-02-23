@@ -182,8 +182,8 @@ conn=sqlite3.connect("status.db")
 c=conn.cursor()
 c.execute("""CREATE TABLE IF NOT EXISTS status(
     user_name text PRIMARY KEY,
-    first_name text PRIMARY KEY,
-    last_name text PRIMARY KEY,
+    first_name text,
+    last_name text,
     problem_status text
 
 )""")
